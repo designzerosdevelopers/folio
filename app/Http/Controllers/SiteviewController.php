@@ -47,7 +47,7 @@ class SiteviewController extends Controller
            
                $work->thumbnails = $thumbnails;
            }
-           
+           //b
            
 
         return view('portfolio.' . $temp->temp_name . '.index', [
