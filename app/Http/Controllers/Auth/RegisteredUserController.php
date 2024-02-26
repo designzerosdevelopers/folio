@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'cv_id' => $request->cv_id,
             'portfolio_id' => $request->portfolio_id,
-            'image' => $request->image,
+            'image' => 'noimage.jpg',
             'address' => $request->address,
             'gender' => $request->gender,
             'interest' => $request->interest,

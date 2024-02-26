@@ -244,7 +244,7 @@
     </div>
     <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
       <div class="grid-sizer"></div>
-      @foreach($works as $work)
+      {{-- @foreach($works as $work)
         <div class="grid-item"><a href="https://dribbble.com">
             <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/1-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/1-small.png')}}"/>
               <figcaption>
@@ -253,7 +253,7 @@
               </figcaption>
             </figure></a>
         </div>
-        @endforeach
+        @endforeach --}}
       {{--<div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
