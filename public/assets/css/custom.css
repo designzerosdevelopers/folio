@@ -1,0 +1,172 @@
+/* ----------------svg size and selected icon border css--------------------- */
+svg {
+    width: 40px; 
+}
+
+.icon-box{
+  border:2px solid rgba(184, 184, 184, 0.897);
+  border-radius: 10%;
+
+}
+
+.selected {
+    border: 3px solid rgb(0, 104, 0)!important;
+}
+
+/* ----------------Images select for delete css--------------------- */
+.image {
+    transition: opacity 0.3s ease-in-out;
+    border: 2px solid #2e2e2e; /* Set the desired border style and color */
+    border-radius: 2px; /* Optional: add rounded corners */
+}
+
+.delete-icon {
+    display: none;
+    position: absolute;
+    text-decoration: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.image-container:active .image {
+    opacity: 0.5;
+}
+  
+  /* ------------------Fields note css-------------------- */
+   .form-group {
+        position: relative;
+    }
+
+        .info-note {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        bottom:40px;
+        right: 0px;
+        background-color: #fbff0056;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 0.8em;
+    }
+
+    .arrow {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #fbff0056 transparent transparent transparent; 
+    right: 0px;
+    bottom:20px;
+    transform: translateX(-50%);
+    display: none;
+    }
+
+
+    .info-icon {
+        position: absolute;
+        top: 65%;
+        right: 17px;
+        cursor: pointer;
+        transform: translateY(-50%);
+    }
+
+   /* --------------------------Nav button css----------------------------- */
+
+    .neu-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+    }
+  
+    .neu-btn {
+        text-decoration: none;
+        color:#6c757d;
+        font-weight: bold;
+        padding: 3px 10px;
+        margin: 5px;
+        border: #9b9102 solid 1px;
+        border-radius: 18px;
+        background: #f0f0f0;
+        font-size: 14px;
+        position: relative;
+        z-index: 2; /* Ensure buttons are above the line */
+    }
+  
+    .neu-btn.active {
+        color: #3d3d3d;
+        border: green solid 2px;
+        background-color: #e2e2e2;
+    }
+  
+  
+    .neu-btn.active:hover {
+        background-color: #f0f0f0;
+    }
+  
+    .neu-btn:not(:last-child) {
+        margin-right: 10px;
+    }
+  
+     
+      .separator {
+        position: absolute;
+        width: 50%;
+        height: 1px;
+        background-color: #9b9102; 
+        top: 53%;
+        transform: translateY(-50%);
+        z-index: 1; 
+    }
+  
+    @media (max-width: 600px) {
+        .neu-btn {
+            padding: 2px 5px;
+            font-size: 8.5px;
+        }
+    }
+  
+    @media (max-width: 806px) {
+          .separator {
+              width: 70%;
+          }
+      }
+      @media (max-width: 806px) {
+          .separator {
+              width: 60%;
+          }
+      }
+      @media (max-width: 706px) {
+          .separator {
+              width: 69%;
+          }
+      }
+      @media (max-width: 606px) {
+          .separator {
+              width: 59%;
+          }
+      }
+    @media (max-width: 476px) {
+          .separator {
+              width: 65%;
+          }
+      }
+    @media (max-width: 416px) {
+          .separator {
+              width: 75%;
+          }
+      }
+  
+      @media (max-width: 377px) {
+          .separator {
+              width: 0%;
+          }
+      }
+  
