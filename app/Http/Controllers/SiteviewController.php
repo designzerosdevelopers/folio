@@ -35,27 +35,46 @@ class SiteviewController extends Controller
            ->distinct()
            ->pluck('work_id');
 
-           $works = Work::where('user_id', $user->id)->get();
-
+           $works = Work::with('image')->get();
+      
            foreach ($works as $work) {
-               $images = Image::where('work_id', $work->id)->get();
-               $thumbnails = '';
-           
-               foreach ($images as $image) {
-                   $thumbnails .= $image->work_photos;
-               }
-           
-               $work->thumbnails = $thumbnails;
-           }
-           
-           
-
-        return view('portfolio.' . $temp->temp_name . '.index', [
-            'user' => $user,
-            'services' => $services,
-            'skills' => $skills,
-            'works' => $works
-        ]);
+            echo "Work ID: " . $work->id . "\n";
+            
+            // Access the first image associated with this work
+            $image = $work->image()->first();
+            
+            if ($image) {
+                echo "Image ID: " . $image->id . "\n";
+                // Access other properties of the image as needed
+                echo "Image Name: " . $image->work_photos . "\n"; // Assuming there's a Name property
+                echo "Image URL: " . $image->url . "\n"; // Assuming there's a URL property
+                echo "Image Caption: " . $image->caption . "\n"; // Assuming there's a Caption property
+            } else {
+                echo "No photo found for this work.\n";
+            }
+        }
     }
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+
+          
+        // return view('portfolio.' . $temp->temp_name . '.index', [
+        //     'user' => $user,
+        //     'services' => $services,
+        //     'skills' => $skills,
+        //     'works' => $works
+        // ]);
+    
     
 }

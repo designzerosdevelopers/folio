@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Work extends Model
 {
     use HasFactory;
-
+    protected $primarykey = "id";
     protected $fillable = [
         'work_title',
         'work_url',
@@ -16,4 +16,8 @@ class Work extends Model
         'work_description',
         'user_id',
     ];
+    public function image()
+    {
+        return $this->hasMany('App\Models\Image');
+    }
 }

@@ -29,6 +29,7 @@
     </noscript>
   </head>
   <body id="top">
+  
 
     <header class="bg-light">
       <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
@@ -244,17 +245,23 @@
     </div>
     <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
       <div class="grid-sizer"></div>
-      {{-- @foreach($works as $work)
+      
+       @foreach($works as $work)
+       
         <div class="grid-item"><a href="https://dribbble.com">
-            <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/1-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/1-small.png')}}"/>
+            <figure class="portfolio-item"><img src="{{asset('project_photoes/'.App\Models\Image::where('work_id', $work->id)
+              ->distinct()
+              ->pluck('work_id')
+              ->first())}}" data-bp=""/>
+     
               <figcaption>
                 <h4 class="h5 mb-0">{{$work->work_title}}</h4>
                 <div>{{$work->work_url}}</div>
               </figcaption>
             </figure></a>
         </div>
-        @endforeach --}}
-      {{--<div class="grid-item"><a href="https://github.com">
+        @endforeach
+      {{-- <div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
               <h4 class="h5 mb-0">Web Development</h4>
@@ -302,8 +309,8 @@
               <h4 class="h5 mb-0">App Development</h4>
               <div>Flutter</div>
             </figcaption>
-          </figure></a></div> --}}
-    </div>
+          </figure></a></div>
+    </div> --}}
   </div>
 </div>
 <div class="section px-3 px-lg-4 pt-5" id="experience">

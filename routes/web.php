@@ -10,6 +10,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteviewController;
+use App\Http\Controllers\AdminsettingController;
 
 Route::get('/choose-live-folio-template', [GuestController::class, 'index'])->name('folio-template-list');
 Route::get('/profile/{temp_name}', [GuestController::class, 'create'])->name('template');
@@ -23,7 +24,9 @@ Route::resource('experience', ExperienceController::class);
 Route::resource('service', ServiceController::class);
 Route::resource('language', LanguageController::class);
 });
-
+// template setting route
+Route::get('site-templates',[AdminsettingController::class, 'indexsitetemplates'])->name('index.site.templates');
+Route::put('template-setting-store',[AdminsettingController::class, 'templatesettingstore'])->name('template.setting.store');
 
 
 Route::get('/', function () {
