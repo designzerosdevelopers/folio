@@ -30,25 +30,13 @@ class SiteviewController extends Controller
            $skills = Skill::where('user_id', $user->id)->get();
 
 
-           $imagesids = Image::where('user_id', $user->id)
-           ->whereIn('work_id', Work::pluck('id')->toArray())
-           ->distinct()
-           ->pluck('work_id');
-
            $works = Work::where('user_id', $user->id)->get();
-
            foreach ($works as $work) {
-               $images = Image::where('work_id', $work->id)->get();
-               $thumbnails = '';
-           
-               foreach ($images as $image) {
-                   $thumbnails .= $image->work_photos;
-               }
-           
-               $work->thumbnails = $thumbnails;
+               $image = Image::where('work_id', $work->id)->first();
+               $work->thumbnails = $image->work_photos;
            }
            
-           
+
 
         return view('portfolio.' . $temp->temp_name . '.index', [
             'user' => $user,
