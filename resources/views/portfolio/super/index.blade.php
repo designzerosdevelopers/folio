@@ -31,6 +31,7 @@
     </noscript>
   </head>
   <body id="top">
+  
 
     <header class="bg-light">
       <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
@@ -308,8 +309,8 @@
               <h4 class="h5 mb-0">App Development</h4>
               <div>Flutter</div>
             </figcaption>
-          </figure></a></div> --}}
-    </div>
+          </figure></a></div>
+    </div> --}}
   </div>
 </div>
 
@@ -319,6 +320,27 @@
     <div class="text-center mb-5">
       <h2 class="marker marker-center">Experience</h2>
     </div>
+    @if ($experiences->isNotEmpty())
+    <div class="row">
+        @foreach ($experiences as $experience)
+            <div class="col-md-6">
+                <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
+                    <div class="card-header px-3 py-2">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 class="h5 mb-1">{{ $experience->position }}</h3>
+                                <div class="text-muted text-small">{{ $experience->company_name }} <small>( {!! $experience->exp_start. " <b> To </b>" .$experience->exp_end !!} )</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-3 py-2">
+                        <p>{{ $experience->exp_description }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    @else
     <div class="row">
       <div class="col-md-6">
         <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
@@ -385,6 +407,7 @@
         </div>
       </div>
     </div>
+    @endif
   </div>
 </div>
 {{-- <div class="section px-3 px-lg-4 pt-5" id="testimonials">
@@ -470,20 +493,28 @@
               <div class="pb-1">Email:</div>
             </div>
             <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">walter@company.com</div>
+              <div class="pb-1 fw-bolder">{{ $user->email }}</div>
             </div>
+           
+
+            @if (!$user->email)
             <div class="col-sm-2">
               <div class="pb-1">Skype:</div>
             </div>
             <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">username@skype.com</div>
+                <div class="pb-1 fw-bolder">{{ $user->email }}</div>
             </div>
+        @endif
+        
+
+        @if ($user->contact_number)
             <div class="col-sm-2">
               <div class="pb-1">Phone:</div>
             </div>
             <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">+0718-111-0011</div>
+              <div class="pb-1 fw-bolder">{{ $user->contact_number }}</div>
             </div>
+          @endif
           </div>
         </div>
       </div>
@@ -493,7 +524,8 @@
 <footer class="pt-4 pb-4 text-center bg-light">
   <div class="container">
     <div class="my-3">
-      <div class="h4">Walter Patterson</div>
+   
+      <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
       <p>Web Developer & Mobile Application Developer</p>
       <div class="social-nav">
         <nav role="navigation">

@@ -43,12 +43,12 @@
             
                         <div class="form-group">
                             <label for="exp_start">Start</label>
-                            <input type="date" class="form-control" value="{{ old('exp_start') }}" id="exp_start" name="exp_start" required>
+                            <input type="month" class="form-control" value="{{ old('exp_start') }}" id="exp_start" name="exp_start" required>
                         </div>
             
                         <div class="form-group" id="end">
                             <label for="exp_end">End</label>
-                            <input type="date" class="form-control" value="{{ old('exp_end') }}" id="exp_end" name="exp_end">
+                            <input type="month" class="form-control" value="{{ old('exp_end') }}" id="exp_end" name="exp_end">
                             <small class="text-muted">If your experience is ongoing, leave above field empty.</small>
                         </div>
             

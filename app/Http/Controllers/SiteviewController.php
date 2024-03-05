@@ -8,6 +8,7 @@ use App\Models\Template;
 use App\Models\Skill;
 use App\Models\Work;
 use App\Models\Image;
+use App\Models\Experience;
 use Illuminate\Http\Request;
 
 class SiteviewController extends Controller
@@ -35,15 +36,28 @@ class SiteviewController extends Controller
                $image = Image::where('work_id', $work->id)->first();
                $work->thumbnail = $image->work_photos;
            }
-           
 
-
+        $experiences = Experience::where('user_id', $user->id )->get();
+        
         return view('portfolio.' . $temp->temp_name . '.index', [
             'user' => $user,
             'services' => $services,
             'skills' => $skills,
-            'works' => $works
+            'works' => $works,
+            'experiences' => $experiences
         ]);
+    }
+
+    public function portfolioImages(Request $request)
+    {
+        
+        $images = Image::where('work_id', $request->id)->get();
+     
+
+        
+     
+
+        return view('portfolio/workImages',['images' => $images, 'username' => $request->username]);
     }
     
 }

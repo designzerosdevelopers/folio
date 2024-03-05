@@ -78,8 +78,8 @@
                   </div>  
                 </a>
               </li>
-              <li class="menu-item {{ request()->is('website-template*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+              <li class="menu-item {{ request()->is('site-template*') ? 'active' : '' }}">
+                <a href="{{ route('index.site.templates')}}" class="menu-link">
                   <div class="row">
                     <span class="col-2"><i class="fas fa-dashboard"></i></span>
                     <span class="col-8">Website</span>
