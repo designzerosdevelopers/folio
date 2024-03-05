@@ -59,5 +59,15 @@ class SiteviewController extends Controller
 
         return view('portfolio/workImages',['images' => $images, 'username' => $request->username]);
     }
+
+    
+    function getImage($work_id)
+    {
+        $image = Image::where('work_id',$work_id)->get(["work_photos"]);
+        // Assuming you want to return the image data as JSON
+        return response()->json($image);
+    }
+    
+    
     
 }

@@ -173,15 +173,7 @@ img.hover-shadow {
     </div>
 
 
-    <div class="column">
-      <img class="demo cursor" src="img_nature_wide.jpg" style="width:100%" onclick="currentSlide(1)" alt="Nature and sunrise">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="img_snow_wide.jpg" style="width:100%" onclick="currentSlide(2)" alt="Snow">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="img_mountains_wide.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
-    </div>
+   
     <div class="column">
       <img class="demo cursor" src="img_lights_wide.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
     </div>
@@ -189,9 +181,56 @@ img.hover-shadow {
 </div>
 
 <script>
-function openModal() {
-  document.getElementById("myModal").style.display = "block";
+function openModal(work_id) {
+  fetch(`/get-images/${work_id}`)
+    .then(response => response.json())
+    .then(data => {
+      // Assign fetched data to the global variable
+      globalData = data;
+      document.getElementById("myModal").style.display = "block";
+      
+      // Clear existing slides
+      document.querySelector(".modal-content").innerHTML = "";
+
+      // Loop through the images and add them to the modal
+      data.forEach((image, index) => {
+        console.log(image['work_photos']);
+        var imagePath = `public/project_photos/${image['work_photos']}`; // Adjust the path as per your directory structure
+        var slide = `
+          <div class="mySlides">
+            <div class="numbertext">${index + 1} / ${data.length}</div>
+            <img src="${imagePath}" style="width:100%">
+          </div>
+        `;
+        document.querySelector(".modal-content").innerHTML += slide;
+      });
+
+      // Add navigation buttons and captions
+      document.querySelector(".modal-content").innerHTML += `
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div class="caption-container">
+          <p id="caption"></p>
+        </div>
+      `;
+
+      // Add demo images for navigation
+      data.forEach((image, index) => {
+        var imagePath = `public/project_photos/${image['work_photos']}`; // Adjust the path as per your directory structure
+        var demoImage = `
+          <div class="column">
+            <img class="demo cursor" src="${imagePath}" style="width:100%" onclick="currentSlide(${index + 1})" alt="${image.alt}">
+          </div>
+        `;
+        document.querySelector(".modal-content").innerHTML += demoImage;
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching image:', error);
+    });
 }
+
+
 
 function closeModal() {
   document.getElementById("myModal").style.display = "none";

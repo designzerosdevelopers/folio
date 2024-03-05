@@ -251,7 +251,7 @@
       <div class="grid-item">
           <a href="#" class="open-modal" data-id="{{ $work->id }}">
               <figure class="portfolio-item">
-                  <img src="{{ asset('project_photos/'.$work->thumbnail) }}" onclick="openModal();currentSlide(1)" class="hover-shadow cursor" />
+                  <img src="{{ asset('project_photos/'.$work->thumbnail) }}" onclick="openModal('{{ $work->id }}');currentSlide(1)" class="hover-shadow cursor" />
                   <figcaption>
                       <h4 class="h5 mb-0">{{ $work->work_title }}</h4>
                       <div>{{ $work->work_url }}</div>
