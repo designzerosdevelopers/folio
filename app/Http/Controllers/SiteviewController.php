@@ -33,7 +33,7 @@ class SiteviewController extends Controller
            $works = Work::where('user_id', $user->id)->get();
            foreach ($works as $work) {
                $image = Image::where('work_id', $work->id)->first();
-               $work->thumbnails = $image->work_photos;
+               $work->thumbnail = $image->work_photos;
            }
            
 

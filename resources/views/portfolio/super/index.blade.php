@@ -24,6 +24,8 @@
             opacity: 1 !important;
             transform: translate(0) scale(1) !important;
         }
+
+
       </style>
 
     </noscript>
@@ -240,20 +242,24 @@
 <div class="section px-2 px-lg-4 pt-5" id="portfolio">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="marker marker-center">Portfolio </h2>
+      <h2 class="marker marker-center">Portfolio</h2>
     </div>
     <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
       <div class="grid-sizer"></div>
-      {{-- @foreach($works as $work)
-        <div class="grid-item"><a href="https://dribbble.com">
-            <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/1-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/1-small.png')}}"/>
-              <figcaption>
-                <h4 class="h5 mb-0">{{$work->work_title}}</h4>
-                <div>{{$work->work_url}}</div>
-              </figcaption>
-            </figure></a>
-        </div>
-        @endforeach --}}
+      @foreach($works as $work)
+      <div class="grid-item">
+          <a href="#" class="open-modal" data-id="{{ $work->id }}">
+              <figure class="portfolio-item">
+                  <img src="{{ asset('project_photos/'.$work->thumbnail) }}" onclick="openModal();currentSlide(1)" class="hover-shadow cursor" />
+                  <figcaption>
+                      <h4 class="h5 mb-0">{{ $work->work_title }}</h4>
+                      <div>{{ $work->work_url }}</div>
+                  </figcaption>
+              </figure>
+          </a>
+      </div>
+  @endforeach
+  @include('includes.client-side.workImages')
       {{--<div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
@@ -306,6 +312,8 @@
     </div>
   </div>
 </div>
+
+
 <div class="section px-3 px-lg-4 pt-5" id="experience">
   <div class="container-narrow">
     <div class="text-center mb-5">
@@ -546,7 +554,23 @@
 
       });
 
-  </script>
+      const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+const closeBtn = document.getElementById('close');
+const triggerElements = document.querySelectorAll('.lightbox-trigger');
+
+triggerElements.forEach(element => {
+    element.addEventListener('click', () => {
+        lightbox.style.display = 'block';
+        lightboxImage.src = element.src;
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+    </script>
   
   </body>
 </html>
