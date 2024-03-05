@@ -28,6 +28,10 @@ Route::resource('language', LanguageController::class);
 Route::get('site-templates',[AdminsettingController::class, 'indexsitetemplates'])->name('index.site.templates');
 Route::put('template-setting-store',[AdminsettingController::class, 'templatesettingstore'])->name('template.setting.store');
 
+// work images view route
+Route::post('portfolio-images',[SiteviewController::class, 'portfolioImages'])->name('portfolio.images');
+
+
 
 Route::get('/', function () {
     return view('client-side.index');
@@ -101,4 +105,4 @@ Route::get('phantom', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('{user_name}', [SiteviewController::class, 'index'])->name('siteview');
+Route::get('{user_name}', [SiteviewController::class, 'index']);

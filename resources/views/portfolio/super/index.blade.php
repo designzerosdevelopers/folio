@@ -246,21 +246,41 @@
     <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
       <div class="grid-sizer"></div>
       
-       @foreach($works as $work)
-       
-        <div class="grid-item"><a href="https://dribbble.com">
-            <figure class="portfolio-item"><img src="{{asset('project_photoes/'.App\Models\Image::where('work_id', $work->id)
-              ->distinct()
-              ->pluck('work_id')
-              ->first())}}" data-bp=""/>
-     
-              <figcaption>
+      {{-- @foreach($works as $work)
+<div class="grid-item">
+    <form id="portfolioForm{{$work->id}}" action="{{ route('portfolio.images',['id' => $work->id]) }}" method="POST" style="display: none;">
+        @csrf
+        <input type="hidden" name="username" value="{{ $user->email }}">
+    </form>
+    <a href="#" onclick="document.getElementById('portfolioForm{{$work->id}}').submit(); return false;">
+        <figure class="portfolio-item">
+            <img src="{{asset('project_photos/'.$work->thumbnail)}}" />
+            <figcaption>
                 <h4 class="h5 mb-0">{{$work->work_title}}</h4>
                 <div>{{$work->work_url}}</div>
-              </figcaption>
-            </figure></a>
+            </figcaption>
+        </figure>
+    </a>
+</div>
+@endforeach --}}
+
+<div class="grid-container">
+    @foreach($works as $work)
+        <div class="grid-item">
+            <a href="{{asset('project_photos/'.$work->thumbnail)}}" target="_blank">
+                <figure class="portfolio-item">
+                    <img src="{{asset('project_photos/'.$work->thumbnail)}}" data-bp="{{asset('project_photos/'.$work->thumbnail)}}"/>
+                    <figcaption>
+                        <h4 class="h5 mb-0">{{$work->work_title}}</h4>
+                        <div>{{$work->work_url}}</div>
+                    </figcaption>
+                </figure>
+            </a>
         </div>
-        @endforeach
+    @endforeach
+</div>
+
+
       {{-- <div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
@@ -318,6 +338,27 @@
     <div class="text-center mb-5">
       <h2 class="marker marker-center">Experience</h2>
     </div>
+    @if ($experiences->isNotEmpty())
+    <div class="row">
+        @foreach ($experiences as $experience)
+            <div class="col-md-6">
+                <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
+                    <div class="card-header px-3 py-2">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 class="h5 mb-1">{{ $experience->position }}</h3>
+                                <div class="text-muted text-small">{{ $experience->company_name }} <small>( {!! $experience->exp_start. " <b> To </b>" .$experience->exp_end !!} )</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-3 py-2">
+                        <p>{{ $experience->exp_description }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    @else
     <div class="row">
       <div class="col-md-6">
         <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
@@ -384,6 +425,7 @@
         </div>
       </div>
     </div>
+    @endif
   </div>
 </div>
 {{-- <div class="section px-3 px-lg-4 pt-5" id="testimonials">
@@ -469,20 +511,28 @@
               <div class="pb-1">Email:</div>
             </div>
             <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">walter@company.com</div>
+              <div class="pb-1 fw-bolder">{{ $user->email }}</div>
             </div>
+           
+
+            @if (!$user->email)
             <div class="col-sm-2">
               <div class="pb-1">Skype:</div>
             </div>
             <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">username@skype.com</div>
+                <div class="pb-1 fw-bolder">{{ $user->email }}</div>
             </div>
+        @endif
+        
+
+        @if ($user->contact_number)
             <div class="col-sm-2">
               <div class="pb-1">Phone:</div>
             </div>
             <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">+0718-111-0011</div>
+              <div class="pb-1 fw-bolder">{{ $user->contact_number }}</div>
             </div>
+          @endif
           </div>
         </div>
       </div>
@@ -492,7 +542,8 @@
 <footer class="pt-4 pb-4 text-center bg-light">
   <div class="container">
     <div class="my-3">
-      <div class="h4">Walter Patterson</div>
+   
+      <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
       <p>Web Developer & Mobile Application Developer</p>
       <div class="social-nav">
         <nav role="navigation">

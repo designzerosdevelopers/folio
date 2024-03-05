@@ -40,13 +40,13 @@ class ExperienceController extends Controller
                 'exp_description' => 'nullable|string',
             ]);
             
-
+       
             Experience::create([
                 'user_id' => auth()->id(),
                 'company_name' => $request->company_name,
                 'position' => $request->position,
                 'exp_start' => $request->exp_start,
-                'exp_end' => $request->exp_end,
+                'exp_end' => !empty($request->exp_end) ? $request->exp_end : "continue",
                 'exp_description' => $request->exp_description,
             ]);
 
@@ -92,7 +92,7 @@ class ExperienceController extends Controller
             'company_name' => $request->company_name,
             'position' => $request->position,
             'exp_start' => $request->exp_start,
-            'exp_end' => $request->exp_end,
+            'exp_end' => !empty($request->exp_end) ? $request->exp_end : "continue",
             'exp_description' => $request->exp_description,
         ]);
 
