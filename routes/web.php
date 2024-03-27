@@ -35,6 +35,8 @@ Route::post('portfolio-images',[SiteviewController::class, 'portfolioImages'])->
 // images fetching 
 Route::get('get-images/{id}',[SiteviewController::class, 'getImage'])->name('get.image');
 
+// cv view
+Route::get('{user}/cv',[SiteviewController::class, 'ViewCv'])->name('view.cv');
 
 
 Route::get('/', function () {

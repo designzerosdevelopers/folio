@@ -240,6 +240,7 @@
     </div>
   </div>
 </div>
+ @include('includes.client-side.workImages')
 <div class="section px-2 px-lg-4 pt-5" id="portfolio">
   <div class="container">
     <div class="text-center mb-5">
@@ -260,7 +261,7 @@
           </a>
       </div>
   @endforeach
-  @include('includes.client-side.workImages')
+ 
       {{--<div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
@@ -526,7 +527,7 @@
     <div class="my-3">
    
       <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
-      <p>Web Developer & Mobile Application Developer</p>
+      <p>{{ !empty($user->profession) ? $user->profession : 'Web Developer & Mobile Application Developer' }}</p>
       <div class="social-nav">
         <nav role="navigation">
           <ul class="nav justify-content-center">

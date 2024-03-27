@@ -247,7 +247,8 @@ body{
 		</div>
 		<div class="resume_bottom">
 			<div class="resume_item resume_namerole">
-				<div class="name">Rosie Jackson</div>
+				
+				<div class="name">{{!empty($vc->temp_name)? $cv->temp_name :'Rosie Jackson'}}</div>
 				<div class="role">UI Designer</div>
 			</div>
 			<div class="resume_item resume_profile">
@@ -319,14 +320,14 @@ body{
 	</div>
 	<div class="resume_right">
 		<div class="resume_item resume_namerole">
-			<div class="name">Rosie Jackson</div>
-			<div class="role">UI Designer</div>
+			<div class="name">{{!empty($user->name)? $user->name :'Rosie Jackson'}}</div>
+			<div class="role">{{!empty($user->profession)? $user->profession :'Rosie Jackson'}}</div>
 		</div>
 		<div class="resume_item resume_education">
-			<div class="resume_title">Education</div>
+			<div class="resume_title">{{!empty($education->degree_title)? $education->degree_title :'Education'}}</div>
 			<div class="resume_info">
 				<div class="resume_data">
-					<div class="year">2000 - 2010</div>
+					<div class="year">{{!empty($education->degree_start)? $education->degree_start :'start'}}</div>
 					<div class="content">
 						<p>Title</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
