@@ -9,6 +9,7 @@ use App\Models\Skill;
 use App\Models\Work;
 use App\Models\Image;
 use App\Models\Experience;
+use App\Models\Education;
 use Illuminate\Http\Request;
 
 class SiteviewController extends Controller
@@ -59,5 +60,25 @@ class SiteviewController extends Controller
 
         return view('portfolio/workImages',['images' => $images, 'username' => $request->username]);
     }
+
+    
+    function getImage($work_id)
+    {
+
+        $image = Image::where('work_id',$work_id)->get(["work_photos"]);
+        // Assuming you want to return the image data as JSON
+        return response()->json($image);
+    }
+
+    function ViewCv($user)
+    {
+        $user = User::where('email', $user)->first(); // Retrieve the user with the given email
+        $cv_id = $user->cv_id;
+        $cv = Template::where('id', $cv_id)->first();  // Get cv template details
+        $education = Education::where('user_id', $user->id)->first();  // Get Education details
+        return view('cv.'.$cv->temp_name, ['user' =>  $user], ['education'=> $education]) ;
+    }
+    
+    
     
 }

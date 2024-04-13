@@ -28,9 +28,15 @@ Route::resource('language', LanguageController::class);
 Route::get('site-templates',[AdminsettingController::class, 'indexsitetemplates'])->name('index.site.templates');
 Route::put('template-setting-store',[AdminsettingController::class, 'templatesettingstore'])->name('template.setting.store');
 
+
 // work images view route
 Route::post('portfolio-images',[SiteviewController::class, 'portfolioImages'])->name('portfolio.images');
 
+// images fetching 
+Route::get('get-images/{id}',[SiteviewController::class, 'getImage'])->name('get.image');
+
+// cv view
+Route::get('{user}/cv',[SiteviewController::class, 'ViewCv'])->name('view.cv');
 
 
 Route::get('/', function () {
