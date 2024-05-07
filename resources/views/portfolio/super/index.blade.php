@@ -47,10 +47,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto me-2">
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                        @if (!empty($services) && !empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        @elseif(empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        @endif
+                        @if (!empty($skills) && !empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                        @elseif(empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                        @endif
+                        @if (!empty($works) && !empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        @elseif(empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        @endif
+                        @if (!empty($experiences) && !empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                        @elseif(empty($user->email))
+                            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                        @endif
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -75,7 +91,11 @@
                                     </h1>
                                     <p class="lead fw-normal mt-3" data-aos="fade-up" id="user-profession"
                                         data-aos-delay="100">
-                                        {{ !empty($user->profession) ? $user->profession : 'Web Developer & Mobile Application Developer' }}
+                                        @if (!empty($user->profession) && !empty($user->email))
+                                            {{ $user->profession }}
+                                        @elseif (empty($user->email))
+                                            Web Developer & Mobile Application Developer
+                                        @endif
                                     </p>
                                     <div class="social-nav" data-aos="fade-up" data-aos-delay="200">
                                         <nav role="navigation">
@@ -110,6 +130,20 @@
                                                                 class="fab fa-github"></i><span
                                                                 class="menu-title sr-only">GitHub</span></a></li>
                                                 @endif
+                                                @if (!empty($user->fiverr))
+                                                    <li class="nav-item"><a class="nav-link"
+                                                            href="https://{{ $user->fiverr }}" title="Fiverr">
+                                                            <svg width="17" height="17" viewBox="0 0 10 10"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="5" cy="5" r="5"
+                                                                    fill="black" />
+                                                                <text x="50%" y="50%" text-anchor="middle"
+                                                                    fill="white" font-size="3px">Fiverr</text>
+                                                            </svg><span class="menu-title sr-only">Fiver</span></a>
+                                                    </li>
+                                                @endif
+
+
                                                 @if (!empty($user->upwork))
                                                     <li class="nav-item"><a class="nav-link"
                                                             href="https://{{ $user->upwork }}" title="Upwork"><i
@@ -250,52 +284,50 @@
                     </div>
                 </div>
             </div>
-            <div class="section px-3 px-lg-4 pt-5" id="services">
-                <div class="container-narrow">
-                    <div class="text-center mb-5">
-                        <h2 class="marker marker-center">My Services</h2>
-                    </div>
-                    {{-- <div class="text-center">
-      <p class="mx-auto mb-3" style="max-width:600px"> I offer services fit for any website or app. I can quickly maximize timely deliverables for real-time schemas.</p>
-    </div> --}}
-
-                    <div class="row py-3 justify-content-center">
-                        @if (!empty($services))
-                            @foreach ($services as $service)
-                                <div class="col-md-3 col-7  text-center" data-aos="fade-up" data-aos-delay="100">
-                                    {!! $service->svg_icon_code !!}
-                                    <div class="h5">{{ $service->service_title }}</div>
+            @if (!empty($services) && !empty($user->email))
+                <div class="section px-3 px-lg-4 pt-5" id="services">
+                    <div class="container-narrow">
+                        <div class="text-center mb-5">
+                            <h2 class="marker marker-center">My Services</h2>
+                        </div>
+                        <div class="row py-3 justify-content-center">
+                            @if (!empty($services))
+                                @foreach ($services as $service)
+                                    <div class="col-md-3 col-7  text-center" data-aos="fade-up" data-aos-delay="100">
+                                        {!! $service->svg_icon_code !!}
+                                        <div class="h5">{{ $service->service_title }}</div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="100"><img
+                                        class="mb-2"
+                                        src="{{ asset('portfolio_assets/super/images/services/web-design.svg') }}"
+                                        width="96" height="96" alt="web design" />
+                                    <div class="h5">Web Design</div>
                                 </div>
-                            @endforeach
-                        @else
-                            <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="100"><img
-                                    class="mb-2"
-                                    src="{{ asset('portfolio_assets/super/images/services/web-design.svg') }}"
-                                    width="96" height="96" alt="web design" />
-                                <div class="h5">Web Design</div>
-                            </div>
-                            <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="200"><img
-                                    class="mb-2"
-                                    src="{{ asset('portfolio_assets/super/images/services/graphic-design.svg') }}"
-                                    width="96" height="96" alt="graphic design" />
-                                <div class="h5">Graphic Design</div>
-                            </div>
-                            <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="300"><img
-                                    class="mb-2"
-                                    src="{{ asset('portfolio_assets/super/images/services/ui-ux.svg') }}"
-                                    width="96" height="96" alt="ui-ux" />
-                                <div class="h5">UI/UX</div>
-                            </div>
-                            <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="400"><img
-                                    class="mb-2"
-                                    src="{{ asset('portfolio_assets/super/images/services/app-development.svg') }}"
-                                    width="96" height="96" alt="app development" />
-                                <div class="h5">App Development</div>
-                            </div>
-                        @endif
+                                <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="200"><img
+                                        class="mb-2"
+                                        src="{{ asset('portfolio_assets/super/images/services/graphic-design.svg') }}"
+                                        width="96" height="96" alt="graphic design" />
+                                    <div class="h5">Graphic Design</div>
+                                </div>
+                                <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="300"><img
+                                        class="mb-2"
+                                        src="{{ asset('portfolio_assets/super/images/services/ui-ux.svg') }}"
+                                        width="96" height="96" alt="ui-ux" />
+                                    <div class="h5">UI/UX</div>
+                                </div>
+                                <div class="col-md-3 text-center" data-aos="fade-up" data-aos-delay="400"><img
+                                        class="mb-2"
+                                        src="{{ asset('portfolio_assets/super/images/services/app-development.svg') }}"
+                                        width="96" height="96" alt="app development" />
+                                    <div class="h5">App Development</div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
             <div class="section px-3 px-lg-4 pt-5" id="skills">
                 <div class="container-narrow">
                     <div class="text-center mb-5">
@@ -426,7 +458,7 @@
                                 <a href="#" class="open-modal" data-id="{{ $work->id }}">
                                     <figure class="portfolio-item">
                                         <img src="{{ asset('project_photos/' . $work->thumbnail) }}"
-                                            onclick="openModal();currentSlide(1)" class="hover-shadow cursor" />
+                                            onclick="openModal(); currentSlide(1)" class="hover-shadow cursor" />
                                         <figcaption>
                                             <h4 class="h5 mb-0">{{ $work->work_title }}</h4>
                                             <div>{{ $work->work_url }}</div>
@@ -435,7 +467,6 @@
                                 </a>
                             </div>
                         @endforeach
-                        @include('includes.client-side.workImages')
                         {{-- <div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
@@ -711,47 +742,66 @@
                                         @endif
 
 
-        @if ($user->contact_number)
-            <div class="col-sm-2">
-              <div class="pb-1">Phone:</div>
+                                        @if ($user->contact_number)
+                                            <div class="col-sm-2">
+                                                <div class="pb-1">Phone:</div>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <div class="pb-1 fw-bolder">{{ $user->contact_number }}</div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="pt-4 pb-4 text-center bg-light">
+                    <div class="container">
+                        <div class="my-3">
+
+                            <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
+                            <p>Web Developer & Mobile Application Developer</p>
+                            <div class="social-nav">
+                                <nav role="navigation">
+                                    <ul class="nav justify-content-center">
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="https://twitter.com/templateflip" title="Twitter"><i
+                                                    class="fab fa-twitter"></i><span
+                                                    class="menu-title sr-only">Twitter</span></a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="https://www.facebook.com/templateflip" title="Facebook"><i
+                                                    class="fab fa-facebook"></i><span
+                                                    class="menu-title sr-only">Facebook</span></a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="https://www.instagram.com/templateflip" title="Instagram"><i
+                                                    class="fab fa-instagram"></i><span
+                                                    class="menu-title sr-only">Instagram</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/"
+                                                title="LinkedIn"><i class="fab fa-linkedin"></i><span
+                                                    class="menu-title sr-only">LinkedIn</span></a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="https://www.behance.net/templateflip" title="Behance"><i
+                                                    class="fab fa-behance"></i><span
+                                                    class="menu-title sr-only">Behance</span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="text-small text-secondary">
+                            <div class="mb-1">&copy; Super Folio. All rights reserved.</div>
+                            <div>
+                                <!-- Make sure to buy a license for the template before removing the line below. Buy license on https://templateflip.com/ -->Design
+                                - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-            <div class="col-sm-10">
-              <div class="pb-1 fw-bolder">{{ $user->contact_number }}</div>
-            </div>
-          @endif
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<footer class="pt-4 pb-4 text-center bg-light">
-  <div class="container">
-    <div class="my-3">
-   
-      <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
-      <p>Web Developer & Mobile Application Developer</p>
-      <div class="social-nav">
-        <nav role="navigation">
-          <ul class="nav justify-content-center">
-            <li class="nav-item"><a class="nav-link" href="https://twitter.com/templateflip" title="Twitter"><i class="fab fa-twitter"></i><span class="menu-title sr-only">Twitter</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/templateflip" title="Facebook"><i class="fab fa-facebook"></i><span class="menu-title sr-only">Facebook</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/templateflip" title="Instagram"><i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/" title="LinkedIn"><i class="fab fa-linkedin"></i><span class="menu-title sr-only">LinkedIn</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.behance.net/templateflip" title="Behance"><i class="fab fa-behance"></i><span class="menu-title sr-only">Behance</span></a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <div class="text-small text-secondary">
-      <div class="mb-1">&copy; Super Folio. All rights reserved.</div>
-      <div>
-        <!-- Make sure to buy a license for the template before removing the line below. Buy license on https://templateflip.com/ -->Design - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a></div>
-    </div>
-  </div>
-</footer></div>
-    </div>
-    <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i class="fas fa-angle-up fa-x"></i></span></a></div>
+        <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i
+                        class="fas fa-angle-up fa-x"></i></span></a></div>
+        @include('includes.client-side.workImages')
 
         <script src="{{ asset('portfolio_assets/super/scripts/imagesloaded.pkgd.min.js?ver=1.2.0') }}"></script>
         <script src="{{ asset('portfolio_assets/super/scripts/masonry.pkgd.min.js?ver=1.2.0') }}"></script>
