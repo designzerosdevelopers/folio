@@ -446,6 +446,9 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div class="section px-2 px-lg-4 pt-5" id="portfolio">
                 <div class="container">
                     <div class="text-center mb-5">
@@ -455,10 +458,12 @@
                         <div class="grid-sizer"></div>
                         @foreach ($works as $work)
                             <div class="grid-item">
-                                <a href="#" class="open-modal" data-id="{{ $work->id }}">
+                               
+                                <a href="#" class="open-modal">
                                     <figure class="portfolio-item">
                                         <img src="{{ asset('project_photos/' . $work->thumbnail) }}"
-                                            onclick="openModal(); currentSlide(1)" class="hover-shadow cursor" />
+                                        onclick="openModal('{{ $work->id }}'); " class="hover-shadow cursor" />
+                                   
                                         <figcaption>
                                             <h4 class="h5 mb-0">{{ $work->work_title }}</h4>
                                             <div>{{ $work->work_url }}</div>
@@ -467,6 +472,21 @@
                                 </a>
                             </div>
                         @endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         {{-- <div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
