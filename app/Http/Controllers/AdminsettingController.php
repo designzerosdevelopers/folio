@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Template;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
-
 use Illuminate\Http\Request;
+
+
+
 
 class AdminsettingController extends Controller
 {
@@ -26,4 +27,23 @@ class AdminsettingController extends Controller
         $user->save();
         return redirect()->back()->with('sucess','Your template successfully changed');
     }
+
+    public function visibility(Request $request, $id, $modelName) {
+       
+        $modelClass = app()->make("App\\Models\\$modelName");
+        
+     
+        $model = $modelClass::find($id);
+    
+   
+        $model->visibility = $request->visibility;
+        
+    
+        $model->save();
+    
+        
+        return redirect()->back()->with('success', 'Saved successfully.');
+    }
+    
+    
 }

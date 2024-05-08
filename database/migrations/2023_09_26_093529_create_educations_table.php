@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('degree_start')->nullable();
             $table->string('degree_end')->nullable();
             $table->text('degree_description')->nullable();
+            $table->integer('visibility')->default(0);
             $table->timestamps();
         });
     }

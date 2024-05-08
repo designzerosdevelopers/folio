@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Models\Service;
-Use App\Models\Icon;
+use App\Models\Service;
+use App\Models\Icon;
 use Illuminate\Validation\Rule;
 
 class ServiceController extends Controller
@@ -40,43 +40,52 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-
-            $rules = [
-                'service_title' => [
-                    $request->icon_id == 0 ? 'required' : 'nullable',
-                    'string',
-                    'max:255',
-                    Rule::unique('services')->where(function ($query) {
-                        return $query->where('user_id', auth()->id());
-                    }),
-                ],
-                'icon_id' => 'nullable',
-                'svg_icon_code' => $request->icon_id == 0 ? 'required' : 'nullable',
-                'service_description' => 'required|string',
-            ];
-
-            if ($request->icon_id != 0) {
+        // Define validation rules
+        $rules = [
+            'service_title' => [
+                $request->icon_id == 0 ? 'required' : 'nullable',
+                'string',
+                'max:255',
                 Rule::unique('services')->where(function ($query) {
                     return $query->where('user_id', auth()->id());
-                });
-            }
+                })
+            ],
 
-            // Validate the request
+            'icon_id' => [
+                'nullable',
+            ],
+
+            'svg_icon_code' => $request->icon_id == 0 ? 'required' : 'nullable',
+            'service_description' => 'required|string',
+        ];
+
+        if (empty($request->service_title)) {
             $request->validate($rules, [
-                'icon_id.unique' => 'The service title has already been taken.'
+                'icon_id.unique' => 'You already have a service with this title.'
             ]);
-
-            Service::create([
-                'user_id' => auth()->id(),
-                'icon_id' => $request->icon_id,
-                'service_title' => $request->icon_id > 0 ? null : $request->service_title,
-                'svg_icon_code' => $request->icon_id > 0 ? null : $request->svg_icon_code,
-                'service_description' => $request->service_description,
+           
+        }else{
+            $request->validate($rules, [
+                'service_title.unique' => 'You already have a service with this title.'
             ]);
-            
-            return redirect()->route('service.index')->with('success','Added successfully'); 
+        }
 
+     
+
+
+        // Create the service
+        Service::create([
+            'user_id' => auth()->id(),
+            'icon_id' => $request->icon_id,
+            'service_title' => $request->icon_id > 0 ? null : $request->service_title,
+            'svg_icon_code' => $request->icon_id > 0 ? null : $request->svg_icon_code,
+            'service_description' => $request->service_description,
+            'visibility' => $request->visibility,
+        ]);
+
+        return redirect()->route('service.index')->with('success', 'Service added successfully');
     }
+
 
 
     /**
@@ -86,13 +95,13 @@ class ServiceController extends Controller
     {
         $service = Service::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
         $icons = Icon::get();
-        if($service->icon_id != 0){
-            $icon =Icon::find($service->icon_id);
+        if ($service->icon_id != 0) {
+            $icon = Icon::find($service->icon_id);
             $service->service_title = $icon->svg_title;
             $service->svg_icon_code = $icon->svg;
         }
-       
-        return view('admin.service.edit',['icons'=>$icons, 'service'=>$service]);
+
+        return view('admin.service.edit', ['icons' => $icons, 'service' => $service]);
 
     }
 
@@ -102,34 +111,26 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-// Define the base validation rules
-$rules = [
-    'service_title' => [
-        $request->icon_id == 0 ? 'required' : 'nullable',
-        'string',
-        'max:255',
-        Rule::unique('services')->where(function ($query) use ($request, $id) {
-            return $query->where('user_id', auth()->id())
-                ->where('id', '<>', $id);
-        }),
-    ],
-    'icon_id' => ['nullable'],
-    'svg_icon_code' => [$request->icon_id == 0 ? 'required' : 'nullable'],
-    'service_description' => ['required', 'string'],
-];
+        // Define the base validation rules
+        $rules = [
+            'service_title' => [
+                $request->icon_id == 0 ? 'required' : 'nullable',
+                'string',
+                'max:255',
+            ],
+            'icon_id' => ['nullable'],
+            'svg_icon_code' => [$request->icon_id == 0 ? 'required' : 'nullable'],
+            'service_description' => ['required', 'string'],
+        ];
 
-// Conditionally add the unique rule for icon_id if it's not equal to 0
-if ($request->icon_id != 0) {
-    $rules['icon_id'][] = Rule::unique('services')->where(function ($query) use ($request, $id) {
-        return $query->where('user_id', auth()->id())
-            ->where('id', '<>', $id);
-    });
-}
+        // Conditionally add the unique rule for icon_id if it's not equal to 0
+        if ($request->icon_id != 0) {
+            $rules['icon_id'][] = Rule::unique('services')->where(function ($query) use ($request, $id) {
+                return $query->where('user_id', auth()->id())
+                    ->where('id', '<>', $id);
+            });
+        }
 
-// Validate the request
-$request->validate($rules, [
-    'icon_id.unique' => 'The service title has already been taken.'
-]);
 
 
         $service = Service::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
@@ -138,9 +139,10 @@ $request->validate($rules, [
         $service->service_title = $request->icon_id > 0 ? null : $request->service_title;
         $service->svg_icon_code = $request->icon_id > 0 ? null : $request->svg_icon_code;
         $service->service_description = $request->service_description;
+        $service->visibility = $request->visibility;
         $service->save();
 
-        return redirect()->route('service.index')->with('success','Updated successfully');   
+        return redirect()->route('service.index')->with('success', 'Updated successfully');
     }
 
     /**
@@ -150,6 +152,6 @@ $request->validate($rules, [
     {
         $service = Service::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
         $service->delete();
-        return redirect()->route('service.index')->with('success','Deleted successfully');
+        return redirect()->route('service.index')->with('success', 'Deleted successfully');
     }
 }

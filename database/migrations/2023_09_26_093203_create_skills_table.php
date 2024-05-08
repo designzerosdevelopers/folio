@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('skill_name')->nullable();
             $table->string('skill_percentage')->nullable();
+            $table->integer('visibility')->default(0);
             $table->timestamps();
         });
     }

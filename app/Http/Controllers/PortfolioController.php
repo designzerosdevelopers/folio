@@ -58,6 +58,7 @@ class PortfolioController extends Controller
             'work_url'          => $request->work_url,
             'work_date'         => $request->work_date,
             'work_description'  => $request->work_description,
+            'visibility' => $request->visibility,
         ]);
         
         foreach ($request->file('work_photos') as $file) {
@@ -100,6 +101,7 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
 
         $work = Work::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
         $request->validate([
@@ -134,11 +136,13 @@ class PortfolioController extends Controller
             }
         }
 
-        $work->update([
+        $status  = $work->update([
+            'visibility'        => $request->visibility,
             'work_title'        => $request->work_title,
             'work_url'          => $request->work_url,
             'work_date'         => $request->work_date,
             'work_description'  => $request->work_description,
+          
         ]);
         
         return redirect()->route('portfolio.index')->with('success', 'Updated successfully');       

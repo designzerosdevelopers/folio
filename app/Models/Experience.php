@@ -16,6 +16,7 @@ class Experience extends Model
         'exp_start',
         'exp_end',
         'exp_description',
+        'visibility'     
     ];
 
 

@@ -25,6 +25,7 @@
                       <tr>
                         <th>Project name</th>
                         <th>URL</th>
+                        <th>Visibility</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -34,12 +35,29 @@
                           <tr>
                               <td>{{$portfolio->work_title}}</td>
                               <td>{{$portfolio->work_url}}</td>
+                              @if ($portfolio->visibility === 1)
+                              <td><span class="badge bg-label-success me-1">Visible</span></td>
+                              @else
+                              <td><span class="badge bg-label-warning me-1">Invisible</span></td>
+                              @endif
                               <td>
                                   <div class="dropdown">
                                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                           <i class="bx bx-dots-vertical-rounded"></i>
                                       </button>
                                       <div class="dropdown-menu">
+                                        <form action="{{ route('visibility', ['id' => $portfolio->id, 'model' => 'Work']) }}" method="POST">
+                                          @csrf
+                                          <button type="submit" class="dropdown-item">
+                                              @if ($portfolio->visibility === 1)
+                                                  <i class="fas fa-eye-slash me-1"></i> Invisible
+                                                  <input type="hidden" name="visibility" value="0">
+                                              @else
+                                                  <input type="hidden" name="visibility" value="1">
+                                                  <i class="fas fa-eye me-1"></i> Visible
+                                              @endif
+                                          </button>
+                                      </form>
                                           <a class="dropdown-item" href="{{Route('portfolio.show', $portfolio->id)}}"
                                               ><i class="fas fa-file me-1"></i> View</a>
                                           <a class="dropdown-item" href="{{Route('portfolio.edit', $portfolio->id)}}"

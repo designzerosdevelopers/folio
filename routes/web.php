@@ -12,6 +12,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteviewController;
 use App\Http\Controllers\AdminsettingController;
 
+Route::post('/visibilty/{id}/{model}', [AdminsettingController::class, 'visibility'])->name('visibility');
 Route::get('/choose-live-folio-template', [GuestController::class, 'index'])->name('folio-template-list');
 Route::get('/profile/{temp_name}', [GuestController::class, 'create'])->name('template');
 Route::middleware(['web','auth'])->group(function () {

@@ -17,6 +17,7 @@ class Education extends Model
         'institute',              
         'degree_start',           
         'degree_end',             
-        'degree_description',     
+        'degree_description',
+        'visibility'     
     ];
 }

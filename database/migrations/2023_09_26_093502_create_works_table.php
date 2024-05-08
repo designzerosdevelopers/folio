@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('work_url')->nullable();
             $table->date('work_date')->nullable();
             $table->text('work_description')->nullable();
+            $table->integer('visibility')->default(0);
             $table->timestamps();
         });
     }

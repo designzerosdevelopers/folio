@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('service_title')->nullable();
             $table->string('svg_icon_code')->nullable();
             $table->text('service_description')->nullable();
+            $table->integer('visibility')->default(0);
             $table->timestamps();
         });
     }

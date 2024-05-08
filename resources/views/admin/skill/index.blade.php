@@ -26,6 +26,7 @@
                       <tr>
                         <th>skill title</th>
                         <th>Percentage</th>
+                        <th>Visibility</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -34,12 +35,29 @@
                           <tr>
                               <td>{{$skill->skill_name}}</td>
                               <td>{{$skill->skill_percentage}}</td>
+                              @if ($skill->visibility === 1)
+                              <td><span class="badge bg-label-success me-1">Visible</span></td>
+                              @else
+                              <td><span class="badge bg-label-warning me-1">Invisible</span></td>
+                              @endif
                               <td>
                                   <div class="dropdown">
                                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                           <i class="bx bx-dots-vertical-rounded"></i>
                                       </button>
                                       <div class="dropdown-menu">
+                                         <form action="{{ route('visibility', ['id' => $skill->id, 'model' => 'Skill']) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                @if ($skill->visibility === 1)
+                                                    <i class="fas fa-eye-slash me-1"></i> Invisible
+                                                    <input type="hidden" name="visibility" value="0">
+                                                @else
+                                                    <input type="hidden" name="visibility" value="1">
+                                                    <i class="fas fa-eye me-1"></i> Visible
+                                                @endif
+                                            </button>
+                                        </form>
                                           <a class="dropdown-item" href="{{Route('skill.edit', $skill->id)}}"
                                               ><i class="fas fa-edit me-1"></i> Edit</a>
                                           <form action="{{ route('skill.destroy', $skill->id) }}" method="POST" style="display: inline;">
@@ -73,6 +91,7 @@
                                 <button type="submit" class="btn rounded-pill btn-primary">
                                     {{ isset($skill_data) ? 'Update' : 'Create' }}
                                 </button>
+                                
                             </div>
                             </form>
                         </td>

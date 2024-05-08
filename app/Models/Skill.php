@@ -13,5 +13,6 @@ class skill extends Model
         'skill_name',
         'skill_percentage',
         'user_id',
+        'visibility'     
     ];
 }

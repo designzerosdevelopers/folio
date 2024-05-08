@@ -48,6 +48,7 @@ class ExperienceController extends Controller
                 'exp_start' => $request->exp_start,
                 'exp_end' => !empty($request->exp_end) ? $request->exp_end : "continue",
                 'exp_description' => $request->exp_description,
+                'visibility' => $request->visibility,
             ]);
 
             return redirect()->route('experience.index')->with('success','Created successfully'); 
@@ -92,6 +93,7 @@ class ExperienceController extends Controller
             'company_name' => $request->company_name,
             'position' => $request->position,
             'exp_start' => $request->exp_start,
+            'visibility' => $request->visibility,
             'exp_end' => !empty($request->exp_end) ? $request->exp_end : "continue",
             'exp_description' => $request->exp_description,
         ]);

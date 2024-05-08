@@ -3,21 +3,22 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <x-page-title menu='Language' page='Index'/>
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
-        @if($errors->any())
-        <div class="alert alert-danger mt-2">
-                @foreach($errors->all() as $error)
-                    {{ $error }}<br>
-                @endforeach
-        </div>
-        @endif
+       
       </div>
     <div class="row">
         <div class="col-md-12">
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+            @if($errors->any())
+            <div class="alert alert-danger mt-2">
+                    @foreach($errors->all() as $error)
+                        {{ $error }}<br>
+                    @endforeach
+            </div>
+            @endif
                   <!-- Hoverable Table rows -->
                   <div class="card">
                     <div class="table-responsive text-nowrap">
@@ -25,6 +26,7 @@
                         <thead>
                           <tr>
                             <th>Language</th>
+                            <th>Visibility</th>
                             <th>Actions</th>
                           </tr>
                         </thead>
@@ -32,12 +34,29 @@
                           @foreach($languages as $language)
                               <tr>
                                   <td>{{$language->language_name}}</td>
+                                  @if ($language->visibility === 1)
+                                  <td><span class="badge bg-label-success me-1">Visible</span></td>
+                                  @else
+                                  <td><span class="badge bg-label-warning me-1">Invisible</span></td>
+                                  @endif
                                   <td>
                                       <div class="dropdown">
                                           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                               <i class="bx bx-dots-vertical-rounded"></i>
                                           </button>
                                           <div class="dropdown-menu">
+                                            <form action="{{ route('visibility', ['id' => $language->id, 'model' => 'Language']) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">
+                                                    @if ($language->visibility === 1)
+                                                        <i class="fas fa-eye-slash me-1"></i> Invisible
+                                                        <input type="hidden" name="visibility" value="0">
+                                                    @else
+                                                        <input type="hidden" name="visibility" value="1">
+                                                        <i class="fas fa-eye me-1"></i> Visible
+                                                    @endif
+                                                </button>
+                                            </form>
                                               <a class="dropdown-item" href="{{Route('language.edit', $language->id)}}"
                                                   ><i class="fas fa-edit me-1"></i> Edit</a>
                                               <form action="{{ route('language.destroy', $language->id) }}" method="POST" style="display: inline;">
