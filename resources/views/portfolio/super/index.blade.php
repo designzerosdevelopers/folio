@@ -136,25 +136,42 @@
                                                             <svg width="17" height="17" viewBox="0 0 10 10"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <circle cx="5" cy="5" r="5"
-                                                                    fill="black" />
-                                                                <text x="50%" y="50%" text-anchor="middle"
+                                                                    fill="#2e2e2e" />
+                                                                <text x="50%" y="60%" text-anchor="middle"
                                                                     fill="white" font-size="3px">Fiverr</text>
-                                                            </svg><span class="menu-title sr-only">Fiver</span></a>
+                                                            </svg><span class="menu-title sr-only">Fiverr</span></a>
                                                     </li>
                                                 @endif
 
 
                                                 @if (!empty($user->upwork))
                                                     <li class="nav-item"><a class="nav-link"
-                                                            href="https://{{ $user->upwork }}" title="Upwork"><i
-                                                                class="fa-brands fa-upwork"></i><span
-                                                                class="menu-title sr-only">Upwork</span></a></li>
+                                                            href="https://{{ $user->upwork }}" title="Upwork">
+                                                            <svg enable-background="new 0 0 2500 2500"
+                                                                viewBox="0 0 2500 2500"
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15">
+                                                                <path
+                                                                    d="m2315.4 0h-2130.7c-102 0-184.7 80.2-184.7 179.1v2141.7c0 99 82.7 179.2 184.7 179.2h2130.7c102 0 184.6-80.3 184.6-179.2v-2141.7c0-98.9-82.6-179.1-184.6-179.1z"
+                                                                    fill="#2e2e2e" />
+                                                                <path
+                                                                    d="m1834.6 1453.7c-98.4 0-190.5-41.7-274.3-109.6l20.4-95.8.9-3.5c18.2-102 75.8-273.3 253-273.3 132.9 0 241 108.3 241 241.3-.4 132.6-108.5 240.9-241 240.9zm0-726.7c-226.4 0-401.9 147.3-473.2 389.5-109-163.7-191.4-360.2-239.7-525.7h-243.6v634.8c0 125.1-101.9 227.1-226.9 227.1s-226.8-102-226.8-227.1v-634.8h-243.7v634.8c-.9 260 210.5 473.4 470.1 473.4s471-213.4 471-473.4v-106.5c47.4 98.9 105.4 198.7 175.9 287.5l-149.3 702.7h249.5l108.1-509.7c94.8 60.8 203.8 98.9 328.8 98.9 267.2 0 484.7-219.2 484.7-486.7-.2-267-217.7-484.8-484.9-484.8z"
+                                                                    fill="white" />
+                                                            </svg>
+                                                            <span class="menu-title sr-only">Upwork</span></a></li>
                                                 @endif
                                                 @if (!empty($user->freelancer))
                                                     <li class="nav-item"><a class="nav-link"
                                                             href="https://{{ $user->freelancer }}"
-                                                            title="Freelancer"><i class="fab fa-freelancer"></i><span
-                                                                class="menu-title sr-only">Freelancer</span></a></li>
+                                                            title="Freelancer">
+                                                            <svg viewBox="-0.23 0 97.266 72.333"
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15">
+                                                                <path
+                                                                    d="M56.897 0l6.624 9.29L97.036 0M22.075 72.333l18.13-17.725-10.912-11.71M54.152 0l-9.69 8.738 16.298.608M16.482 0l3.48 7.133 19.18 1.195M26.75 36.986l14.17-26.434L-.23 8.328M28.4 38.662L41.785 53.04 56.55 38.567l4.582-26.957-17.993-.918"
+                                                                    fill="#2e2e2e" />
+                                                            </svg>
+                                                            <span class="menu-title sr-only">Freelancer</span></a></li>
                                                 @endif
                                                 @if (!empty($user->youtube))
                                                     <li class="nav-item"><a class="nav-link"
@@ -328,17 +345,15 @@
                     </div>
                 </div>
             @endif
-            <div class="section px-3 px-lg-4 pt-5" id="skills">
-                <div class="container-narrow">
-                    <div class="text-center mb-5">
-                        <h2 class="marker marker-center">My Skills</h2>
-                    </div>
-                    {{-- <div class="text-center">
-      <p class="mx-auto mb-3" style="max-width:600px">I am a quick learner and specialize in multitude of skills required for Web Application Development and Product Design</p>
-    </div> --}}
-                    <div class="bg-light p-3">
-                        <div class="row justify-content-center">
-                            @if (!empty($skills))
+
+            @if ((!empty($skills) && count($skills) > 0) and !request()->is('super'))
+                <div class="section px-3 px-lg-4 pt-5" id="skills">
+                    <div class="container-narrow">
+                        <div class="text-center mb-5">
+                            <h2 class="marker marker-center">My Skills</h2>
+                        </div>
+                        <div class="bg-light p-3">
+                            <div class="row justify-content-center">
                                 <div class="col-md-10">
                                     @foreach ($skills as $skill)
                                         <div class="py-1">
@@ -356,7 +371,22 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            @else
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @elseif(request()->is('super'))
+                <div class="section px-3 px-lg-4 pt-5" id="skills">
+                    <div class="container-narrow">
+                        <div class="text-center mb-5">
+                            <h2 class="marker marker-center">My Skills</h2>
+                        </div>
+                        {{-- <div class="text-center">
+                            <p class="mx-auto mb-3" style="max-width:600px">I am a quick learner and specialize in
+                                multitude of skills required for Web Application Development and Product Design</p>
+                        </div> --}}
+                        <div class="bg-light p-3">
+                            <div class="row">
                                 <div class="col-md-5">
                                     <div class="py-1">
                                         <div class="d-flex text-small fw-bolder"><span
@@ -441,33 +471,37 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="section px-2 px-lg-4 pt-5" id="portfolio">
-                <div class="container">
-                    <div class="text-center mb-5">
-                        <h2 class="marker marker-center">Portfolio</h2>
-                    </div>
-                    <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
-                        <div class="grid-sizer"></div>
-                        @foreach ($works as $work)
-                            <div class="grid-item">
-                                <a href="#" class="open-modal" data-id="{{ $work->id }}">
-                                    <figure class="portfolio-item">
-                                        <img src="{{ asset('project_photos/' . $work->thumbnail) }}"
-                                            onclick="openModal(); currentSlide(1)" class="hover-shadow cursor" />
-                                        <figcaption>
-                                            <h4 class="h5 mb-0">{{ $work->work_title }}</h4>
-                                            <div>{{ $work->work_url }}</div>
-                                        </figcaption>
-                                    </figure>
-                                </a>
-                            </div>
-                        @endforeach
-                        {{-- <div class="grid-item"><a href="https://github.com">
+            @endif
+
+            @if (!empty($works))
+                <div class="section px-2 px-lg-4 pt-5" id="portfolio">
+                    <div class="container">
+                        <div class="text-center mb-5">
+                            <h2 class="marker marker-center">Portfolio</h2>
+                        </div>
+                        <div class="grid bp-gallery pb-3" data-aos="zoom-in-up" data-aos-delay="100">
+                            <div class="grid-sizer"></div>
+                            @foreach ($works as $work)
+                                <div class="grid-item">
+                                    <a href="#" class="open-modal" data-id="{{ $work->id }}">
+                                        <figure class="portfolio-item">
+                                            <img src="{{ asset('project_photos/' . $work->thumbnail) }}"
+                                                onclick="openModal(); currentSlide(1)" class="hover-shadow cursor" />
+                                            <figcaption>
+                                                <h4 class="h5 mb-0">{{ $work->work_title }}</h4>
+                                                <div>{{ $work->work_url }}</div>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            @endforeach
+                        @else
+            @endif
+            {{-- <div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
             <figcaption> 
               <h4 class="h5 mb-0">Web Development</h4>
@@ -517,132 +551,139 @@
             </figcaption>
           </figure></a></div>
     </div> --}}
-                    </div>
+        </div>
+    </div>
+
+
+    @if (!empty($experiences))
+        <div class="section px-3 px-lg-4 pt-5" id="experience">
+            <div class="container-narrow">
+                <div class="text-center mb-5">
+                    <h2 class="marker marker-center">Experience</h2>
                 </div>
-
-
-                <div class="section px-3 px-lg-4 pt-5" id="experience">
-                    <div class="container-narrow">
-                        <div class="text-center mb-5">
-                            <h2 class="marker marker-center">Experience</h2>
+                <div class="row">
+                    @foreach ($experiences as $experience)
+                        <div class="col-md-6">
+                            <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
+                                <div class="card-header px-3 py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 class="h5 mb-1">{{ $experience->position }}</h3>
+                                            <div class="text-muted text-small">
+                                                {{ $experience->company_name }} <small>(
+                                                    {!! $experience->exp_start . ' <b> To </b>' . $experience->exp_end !!} )</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body px-3 py-2">
+                                    <p>{{ $experience->exp_description }}</p>
+                                </div>
+                            </div>
                         </div>
-                        @if ($experiences->isNotEmpty())
-                            <div class="row">
-                                @foreach ($experiences as $experience)
-                                    <div class="col-md-6">
-                                        <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
-                                            <div class="card-header px-3 py-2">
-                                                <div class="d-flex justify-content-between">
-                                                    <div>
-                                                        <h3 class="h5 mb-1">{{ $experience->position }}</h3>
-                                                        <div class="text-muted text-small">
-                                                            {{ $experience->company_name }} <small>(
-                                                                {!! $experience->exp_start . ' <b> To </b>' . $experience->exp_end !!} )</small></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body px-3 py-2">
-                                                <p>{{ $experience->exp_description }}</p>
-                                            </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @else
+        <div class="section px-3 px-lg-4 pt-5" id="experience">
+            <div class="container-narrow">
+                <div class="text-center mb-5">
+                    <h2 class="marker marker-center">Experience</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
+                            <div class="card-header px-3 py-2">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h3 class="h5 mb-1">UI/UX Design</h3>
+                                        <div class="text-muted text-small">Designerr Inc.
+                                            <small>(2012-2014)</small>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card mb-3" data-aos="fade-right" data-aos-delay="100">
-                                        <div class="card-header px-3 py-2">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h3 class="h5 mb-1">UI/UX Design</h3>
-                                                    <div class="text-muted text-small">Designerr Inc.
-                                                        <small>(2012-2014)</small>
-                                                    </div>
-                                                </div><img src="images/services/ui-ux.svg" width="48"
-                                                    height="48" alt="ui-ux" />
-                                            </div>
-                                        </div>
-                                        <div class="card-body px-3 py-2">
-                                            <p>Leverage agile frameworks to provide a robust synopsis for high level
-                                                overviews. Iterative approaches to corporate strategy foster
-                                                collaborative thinking to further the overall value proposition.</p>
-                                            <p>Organically grow the holistic world view of disruptive innovation via
-                                                workplace diversity and empowerment.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card mb-3" data-aos="fade-left" data-aos-delay="300">
-                                        <div class="card-header px-3 py-2">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h3 class="h5 mb-1">App Development</h3>
-                                                    <div class="text-muted text-small">MakeMyApp LLC.
-                                                        <small>(2015-2018)</small>
-                                                    </div>
-                                                </div><img src="images/services/app-development.svg" width="48"
-                                                    height="48" alt="app development" />
-                                            </div>
-                                        </div>
-                                        <div class="card-body px-3 py-2">
-                                            <p>Leverage agile frameworks to provide a robust synopsis for high level
-                                                overviews. Iterative approaches to corporate strategy foster
-                                                collaborative thinking to further the overall value proposition.</p>
-                                            <p>Organically grow the holistic world view of disruptive innovation via
-                                                workplace diversity and empowerment.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card mb-3" data-aos="fade-right" data-aos-delay="200">
-                                        <div class="card-header px-3 py-2">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h3 class="h5 mb-1">Web Design</h3>
-                                                    <div class="text-muted text-small">Webbie LLC.
-                                                        <small>(2018-2020)</small>
-                                                    </div>
-                                                </div><img src="images/services/web-design.svg" width="48"
-                                                    height="48" alt="web design" />
-                                            </div>
-                                        </div>
-                                        <div class="card-body px-3 py-2">
-                                            <p>Leverage agile frameworks to provide a robust synopsis for high level
-                                                overviews. Iterative approaches to corporate strategy foster
-                                                collaborative thinking to further the overall value proposition.</p>
-                                            <p>Organically grow the holistic world view of disruptive innovation via
-                                                workplace diversity and empowerment.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card mb-3" data-aos="fade-left" data-aos-delay="400">
-                                        <div class="card-header px-3 py-2">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h3 class="h5 mb-1">Full Stack Development</h3>
-                                                    <div class="text-muted text-small">Coder Inc.
-                                                        <small>(2020-2021)</small>
-                                                    </div>
-                                                </div><img src="images/services/full-stack.svg" width="48"
-                                                    height="48" alt="full stack" />
-                                            </div>
-                                        </div>
-                                        <div class="card-body px-3 py-2">
-                                            <p>Leverage agile frameworks to provide a robust synopsis for high level
-                                                overviews. Iterative approaches to corporate strategy foster
-                                                collaborative thinking to further the overall value proposition.</p>
-                                            <p>Organically grow the holistic world view of disruptive innovation via
-                                                workplace diversity and empowerment.</p>
-                                        </div>
-                                    </div>
+                                    </div><img src="images/services/ui-ux.svg" width="48" height="48"
+                                        alt="ui-ux" />
                                 </div>
                             </div>
-                        @endif
+                            <div class="card-body px-3 py-2">
+                                <p>Leverage agile frameworks to provide a robust synopsis for high level
+                                    overviews. Iterative approaches to corporate strategy foster
+                                    collaborative thinking to further the overall value proposition.</p>
+                                <p>Organically grow the holistic world view of disruptive innovation via
+                                    workplace diversity and empowerment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3" data-aos="fade-left" data-aos-delay="300">
+                            <div class="card-header px-3 py-2">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h3 class="h5 mb-1">App Development</h3>
+                                        <div class="text-muted text-small">MakeMyApp LLC.
+                                            <small>(2015-2018)</small>
+                                        </div>
+                                    </div><img src="images/services/app-development.svg" width="48"
+                                        height="48" alt="app development" />
+                                </div>
+                            </div>
+                            <div class="card-body px-3 py-2">
+                                <p>Leverage agile frameworks to provide a robust synopsis for high level
+                                    overviews. Iterative approaches to corporate strategy foster
+                                    collaborative thinking to further the overall value proposition.</p>
+                                <p>Organically grow the holistic world view of disruptive innovation via
+                                    workplace diversity and empowerment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3" data-aos="fade-right" data-aos-delay="200">
+                            <div class="card-header px-3 py-2">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h3 class="h5 mb-1">Web Design</h3>
+                                        <div class="text-muted text-small">Webbie LLC.
+                                            <small>(2018-2020)</small>
+                                        </div>
+                                    </div><img src="images/services/web-design.svg" width="48" height="48"
+                                        alt="web design" />
+                                </div>
+                            </div>
+                            <div class="card-body px-3 py-2">
+                                <p>Leverage agile frameworks to provide a robust synopsis for high level
+                                    overviews. Iterative approaches to corporate strategy foster
+                                    collaborative thinking to further the overall value proposition.</p>
+                                <p>Organically grow the holistic world view of disruptive innovation via
+                                    workplace diversity and empowerment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3" data-aos="fade-left" data-aos-delay="400">
+                            <div class="card-header px-3 py-2">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h3 class="h5 mb-1">Full Stack Development</h3>
+                                        <div class="text-muted text-small">Coder Inc.
+                                            <small>(2020-2021)</small>
+                                        </div>
+                                    </div><img src="images/services/full-stack.svg" width="48" height="48"
+                                        alt="full stack" />
+                                </div>
+                            </div>
+                            <div class="card-body px-3 py-2">
+                                <p>Leverage agile frameworks to provide a robust synopsis for high level
+                                    overviews. Iterative approaches to corporate strategy foster
+                                    collaborative thinking to further the overall value proposition.</p>
+                                <p>Organically grow the holistic world view of disruptive innovation via
+                                    workplace diversity and empowerment.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {{-- <div class="section px-3 px-lg-4 pt-5" id="testimonials">
+            </div>
+        </div>
+    @endif
+    {{-- <div class="section px-3 px-lg-4 pt-5" id="testimonials">
   <div class="container-narrow">
     <div class="text-center mb-5">
       <h2 class="marker marker-center">Client Testimonials</h2>
@@ -687,182 +728,178 @@
     </div>
   </div>
 </div> --}}
-                <div class="section px-2 px-lg-4 pb-4 pt-5 mb-5" id="contact">
-                    <div class="container-narrow">
-                        <div class="text-center mb-5">
-                            <h2 class="marker marker-center">Contact Me</h2>
-                        </div>
+    <div class="section px-2 px-lg-4 pb-4 pt-5 mb-5" id="contact">
+        <div class="container-narrow">
+            <div class="text-center mb-5">
+                <h2 class="marker marker-center">Contact Me</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="bg-light my-2 p-3 pt-2">
+                        <form action="https://formspree.io/your@email.com" method="POST">
+                            <div class="form-group my-2">
+                                <label for="name" class="form-label fw-bolder">Name</label>
+                                <input class="form-control" type="text" id="displayData" name="name" required>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="email" class="form-label fw-bolder">Email</label>
+                                <input class="form-control" type="email" id="fc-nameDisplay" name="_replyto"
+                                    required>
+                            </div>
+                            <div class="form-group my-2">
+                                <label for="message" class="form-label fw-bolder">Message</label>
+                                <textarea class="form-control" style="resize: none;" id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button class="btn btn-primary mt-2" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="300">
+                    <div class="mt-3 px-1">
+                        <div class="h5">Let’s talk how I can help you!</div>
+                        <p>If you like my work and want to avail my services then drop me a message using
+                            the contact form. </p>
+                        <p>Or get in touch using my email, skype or my contact number.</p>
+                        <p>See you!</p>
+                    </div>
+                    <div class="mt-53 px-1">
                         <div class="row">
-                            <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                                <div class="bg-light my-2 p-3 pt-2">
-                                    <form action="https://formspree.io/your@email.com" method="POST">
-                                        <div class="form-group my-2">
-                                            <label for="name" class="form-label fw-bolder">Name</label>
-                                            <input class="form-control" type="text" id="displayData"
-                                                name="name" required>
-                                        </div>
-                                        <div class="form-group my-2">
-                                            <label for="email" class="form-label fw-bolder">Email</label>
-                                            <input class="form-control" type="email" id="fc-nameDisplay"
-                                                name="_replyto" required>
-                                        </div>
-                                        <div class="form-group my-2">
-                                            <label for="message" class="form-label fw-bolder">Message</label>
-                                            <textarea class="form-control" style="resize: none;" id="message" name="message" rows="4" required></textarea>
-                                        </div>
-                                        <button class="btn btn-primary mt-2" type="submit">Send</button>
-                                    </form>
+                            @if (!empty($user->email))
+                                <div class="col-sm-2">
+                                    <div class="pb-1">Email:</div>
                                 </div>
-                            </div>
-                            <div class="col-md-6" data-aos="fade-left" data-aos-delay="300">
-                                <div class="mt-3 px-1">
-                                    <div class="h5">Let’s talk how I can help you!</div>
-                                    <p>If you like my work and want to avail my services then drop me a message using
-                                        the contact form. </p>
-                                    <p>Or get in touch using my email, skype or my contact number.</p>
-                                    <p>See you!</p>
+                                <div class="col-sm-10">
+                                    <div class="pb-1 fw-bolder">{{ $user->email }}</div>
                                 </div>
-                                <div class="mt-53 px-1">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <div class="pb-1">Email:</div>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <div class="pb-1 fw-bolder">{{ $user->email }}</div>
-                                        </div>
+                            @endif
 
-
-                                        @if (!$user->email)
-                                            <div class="col-sm-2">
-                                                <div class="pb-1">Skype:</div>
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <div class="pb-1 fw-bolder">{{ $user->email }}</div>
-                                            </div>
-                                        @endif
-
-
-                                        @if ($user->contact_number)
-                                            <div class="col-sm-2">
-                                                <div class="pb-1">Phone:</div>
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <div class="pb-1 fw-bolder">{{ $user->contact_number }}</div>
-                                            </div>
-                                        @endif
-                                    </div>
+                            @if (!empty($user->email))
+                                <div class="col-sm-2">
+                                    <div class="pb-1">Skype:</div>
                                 </div>
-                            </div>
+                                <div class="col-sm-10">
+                                    <div class="pb-1 fw-bolder">{{ $user->email }}</div>
+                                </div>
+                            @endif
+
+
+                            @if (!empty($user->contact_number))
+                                <div class="col-sm-2">
+                                    <div class="pb-1">Phone:</div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="pb-1 fw-bolder">{{ $user->contact_number }}</div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
-                <footer class="pt-4 pb-4 text-center bg-light">
-                    <div class="container">
-                        <div class="my-3">
-
-                            <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
-                            <p>Web Developer & Mobile Application Developer</p>
-                            <div class="social-nav">
-                                <nav role="navigation">
-                                    <ul class="nav justify-content-center">
-                                        <li class="nav-item"><a class="nav-link"
-                                                href="https://twitter.com/templateflip" title="Twitter"><i
-                                                    class="fab fa-twitter"></i><span
-                                                    class="menu-title sr-only">Twitter</span></a></li>
-                                        <li class="nav-item"><a class="nav-link"
-                                                href="https://www.facebook.com/templateflip" title="Facebook"><i
-                                                    class="fab fa-facebook"></i><span
-                                                    class="menu-title sr-only">Facebook</span></a></li>
-                                        <li class="nav-item"><a class="nav-link"
-                                                href="https://www.instagram.com/templateflip" title="Instagram"><i
-                                                    class="fab fa-instagram"></i><span
-                                                    class="menu-title sr-only">Instagram</span></a></li>
-                                        <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/"
-                                                title="LinkedIn"><i class="fab fa-linkedin"></i><span
-                                                    class="menu-title sr-only">LinkedIn</span></a></li>
-                                        <li class="nav-item"><a class="nav-link"
-                                                href="https://www.behance.net/templateflip" title="Behance"><i
-                                                    class="fab fa-behance"></i><span
-                                                    class="menu-title sr-only">Behance</span></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="text-small text-secondary">
-                            <div class="mb-1">&copy; Super Folio. All rights reserved.</div>
-                            <div>
-                                <!-- Make sure to buy a license for the template before removing the line below. Buy license on https://templateflip.com/ -->Design
-                                - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
-        <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i
-                        class="fas fa-angle-up fa-x"></i></span></a></div>
-        @include('includes.client-side.workImages')
+    </div>
+    <footer class="pt-4 pb-4 text-center bg-light">
+        <div class="container">
+            <div class="my-3">
 
-        <script src="{{ asset('portfolio_assets/super/scripts/imagesloaded.pkgd.min.js?ver=1.2.0') }}"></script>
-        <script src="{{ asset('portfolio_assets/super/scripts/masonry.pkgd.min.js?ver=1.2.0') }}"></script>
-        <script src="{{ asset('portfolio_assets/super/scripts/BigPicture.min.js?ver=1.2.0') }}"></script>
-        <script src="{{ asset('portfolio_assets/super/scripts/purecounter.min.js?ver=1.2.0') }}"></script>
-        <script src="{{ asset('portfolio_assets/super/scripts/bootstrap.bundle.min.js?ver=1.2.0') }}"></script>
-        <script src="{{ asset('portfolio_assets/super/scripts/aos.min.js?ver=1.2.0') }}"></script>
-        <script src="{{ asset('portfolio_assets/super/scripts/main.js?ver=1.2.0') }}"></script>
-        <script>
-            // Listen for messages sent from any source (no origin check)
-            window.addEventListener('message', function(event) {
-                // Check if the received data is an object
-                function updateAndScroll(element, dataKey, dataValue) {
-                    if (dataValue) {
-                        element.textContent = dataValue;
-                        const centerPosition = element.offsetTop - (window.innerHeight / 2) + (element.clientHeight /
-                            2);
-                        window.scrollTo({
-                            top: centerPosition,
-                            behavior: 'smooth'
-                        });
-                    }
+                <div class="h4">{{ !empty($user->name) ? $user->name : 'Walter Patterson' }}</div>
+                <p>Web Developer & Mobile Application Developer</p>
+                <div class="social-nav">
+                    <nav role="navigation">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item"><a class="nav-link" href="https://twitter.com/templateflip"
+                                    title="Twitter"><i class="fab fa-twitter"></i><span
+                                        class="menu-title sr-only">Twitter</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/templateflip"
+                                    title="Facebook"><i class="fab fa-facebook"></i><span
+                                        class="menu-title sr-only">Facebook</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/templateflip"
+                                    title="Instagram"><i class="fab fa-instagram"></i><span
+                                        class="menu-title sr-only">Instagram</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/"
+                                    title="LinkedIn"><i class="fab fa-linkedin"></i><span
+                                        class="menu-title sr-only">LinkedIn</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://www.behance.net/templateflip"
+                                    title="Behance"><i class="fab fa-behance"></i><span
+                                        class="menu-title sr-only">Behance</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="text-small text-secondary">
+                <div class="mb-1">&copy; Super Folio. All rights reserved.</div>
+                <div>
+                    <!-- Make sure to buy a license for the template before removing the line below. Buy license on https://templateflip.com/ -->Design
+                    - <a href="" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    </div>
+    <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i
+                    class="fas fa-angle-up fa-x"></i></span></a></div>
+    @include('includes.client-side.workImages')
+
+    <script src="{{ asset('portfolio_assets/super/scripts/imagesloaded.pkgd.min.js?ver=1.2.0') }}"></script>
+    <script src="{{ asset('portfolio_assets/super/scripts/masonry.pkgd.min.js?ver=1.2.0') }}"></script>
+    <script src="{{ asset('portfolio_assets/super/scripts/BigPicture.min.js?ver=1.2.0') }}"></script>
+    <script src="{{ asset('portfolio_assets/super/scripts/purecounter.min.js?ver=1.2.0') }}"></script>
+    <script src="{{ asset('portfolio_assets/super/scripts/bootstrap.bundle.min.js?ver=1.2.0') }}"></script>
+    <script src="{{ asset('portfolio_assets/super/scripts/aos.min.js?ver=1.2.0') }}"></script>
+    <script src="{{ asset('portfolio_assets/super/scripts/main.js?ver=1.2.0') }}"></script>
+    <script>
+        // Listen for messages sent from any source (no origin check)
+        window.addEventListener('message', function(event) {
+            // Check if the received data is an object
+            function updateAndScroll(element, dataKey, dataValue) {
+                if (dataValue) {
+                    element.textContent = dataValue;
+                    const centerPosition = element.offsetTop - (window.innerHeight / 2) + (element.clientHeight /
+                        2);
+                    window.scrollTo({
+                        top: centerPosition,
+                        behavior: 'smooth'
+                    });
                 }
+            }
 
-                window.addEventListener('message', function(event) {
-                    if (typeof event.data === 'object') {
-                        const receivedData = event.data;
+            window.addEventListener('message', function(event) {
+                if (typeof event.data === 'object') {
+                    const receivedData = event.data;
 
-                        updateAndScroll(document.getElementById('user-name'), 'name', receivedData.name);
-                        updateAndScroll(document.getElementById('user-profession'), 'profession', receivedData
-                            .profession);
-                        updateAndScroll(document.getElementById('user-description'), 'description', receivedData
-                            .description);
-                        updateAndScroll(document.getElementById('user-email'), 'email', receivedData.email);
-                        updateAndScroll(document.getElementById('contact-number'), 'contact', receivedData
-                            .contact);
-                        updateAndScroll(document.getElementById('user-age'), 'age', receivedData.age);
-                        updateAndScroll(document.getElementById('user-address'), 'address', receivedData
-                            .address);
-                        updateAndScroll(document.getElementById('user-gender'), 'gender', receivedData.gender);
-                    }
-                });
-
+                    updateAndScroll(document.getElementById('user-name'), 'name', receivedData.name);
+                    updateAndScroll(document.getElementById('user-profession'), 'profession', receivedData
+                        .profession);
+                    updateAndScroll(document.getElementById('user-description'), 'description', receivedData
+                        .description);
+                    updateAndScroll(document.getElementById('user-email'), 'email', receivedData.email);
+                    updateAndScroll(document.getElementById('contact-number'), 'contact', receivedData
+                        .contact);
+                    updateAndScroll(document.getElementById('user-age'), 'age', receivedData.age);
+                    updateAndScroll(document.getElementById('user-address'), 'address', receivedData
+                        .address);
+                    updateAndScroll(document.getElementById('user-gender'), 'gender', receivedData.gender);
+                }
             });
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const closeBtn = document.getElementById('close');
-            const triggerElements = document.querySelectorAll('.lightbox-trigger');
+        });
 
-            triggerElements.forEach(element => {
-                element.addEventListener('click', () => {
-                    lightbox.style.display = 'block';
-                    lightboxImage.src = element.src;
-                });
-            });
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const closeBtn = document.getElementById('close');
+        const triggerElements = document.querySelectorAll('.lightbox-trigger');
 
-            closeBtn.addEventListener('click', () => {
-                lightbox.style.display = 'none';
+        triggerElements.forEach(element => {
+            element.addEventListener('click', () => {
+                lightbox.style.display = 'block';
+                lightboxImage.src = element.src;
             });
-        </script>
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+    </script>
 
 </body>
 

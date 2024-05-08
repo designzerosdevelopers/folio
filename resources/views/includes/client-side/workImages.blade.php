@@ -255,10 +255,7 @@ function openModal(work_id) {
 
         <div class="caption-container">
           <p id="caption">  </p>
-        </div>
-
-       
-      `;
+        </div>`;
 
      
 
