@@ -3,21 +3,23 @@
  /* Adjust the styles for big and small screens */
  @media screen and (min-width: 550px) {
   .slide-image {
-            width: 50%; /* Make the image 50% smaller on big screens */
+           width: 50%;
             background-color: black; /* Set background color to black */
             display: block; /* Ensures block-level display */
             margin: auto; /* Centers the image horizontally */
             padding-top: 0px; /* Pushes the image up by 20px */
+           
         }
     }
 
     @media screen and (max-width: 767px) {
       .slide-image {
-            width: 100%; /* Make the image 100% on small screens */
+            width: auto;
             background-color: black; /* Set background color to black */
             display: block; /* Ensures block-level display */
             margin: auto; /* Centers the image horizontally */
             padding-top: 20px; /* Pushes the image up by 20px */
+           width: 50%
         }
     }
 
@@ -108,6 +110,7 @@ body {
   font-size: 20px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
+  text-decoration: none;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -191,34 +194,39 @@ img.hover-shadow {
       <img src="img_lights_wide.jpg" style="width:100%">
     </div>  --}}
     
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    {{-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a> --}}
 
-    <div class="caption-container">
+    {{-- <div class="caption-container">
       <p id="caption"></p>
-    </div>
+    </div> --}}
 
 
-{{--    
-    <div class="column">
-      <img class="demo cursor" src="img_lights_wide.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights"> --}}
+   
+    {{-- <div class="column">
+      <img class="demo cursor" src="img_lights_wide.jpg" style="width:100%" onclick="currentSlide(1)" alt="Northern Lights"> --}}
     </div>
   </div>
 </div>
 
 <script>
+ 
 function openModal(work_id) {
 
+ 
   fetch(`/get-images/${work_id}`)
     .then(response => response.json())
     .then(data => {
       // Assign fetched data to the global variable
+      work = data.work;
+      data = data.images;
       globalData = data;
+
       document.getElementById("myModal").style.display = "block";
       
       // Clear existing slides
       document.querySelector(".modal-content").innerHTML = "";
-
+     
       // Loop through the images and add them to the modal
       data.forEach((image, index) => {
           var imagePath = `project_photos/${image['work_photos']}`; // Adjust the path as per your directory structure
@@ -229,10 +237,9 @@ function openModal(work_id) {
               </div>
           `;
           document.querySelector(".modal-content").innerHTML += slide;
+          
       });
-     
-
-
+      
       // Show the modal when clicking on an image
       document.querySelectorAll('.mySlides img').forEach(img => {
           img.addEventListener('click', function() {
@@ -248,53 +255,62 @@ function openModal(work_id) {
       });
 
 
-      // Add navigation buttons and captions
       document.querySelector(".modal-content").innerHTML += `
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
         <div class="caption-container">
-          <p id="caption">  </p>
+          <div class="caption-info">
+            <p id="caption">Title: ${work.work_title}</p>
+            <p id="work_url">URL: <a href="${work.work_url}" target="_blank" style="color: white;">${work.work_url}</a></p>
+          </div>
+          <div class="caption-info">
+            <p id="work_date">Date: ${work.work_date}</p>
+          </div>
+          <div class="caption-content">
+            <p id="description">Description: ${work.work_description}</p>
+          </div>
         </div>`;
 
+
+
+        
+    
+        currentSlide(1);
      
 
       // Add demo images for navigation
+      // var demoImages = '';
       // data.forEach((image, index) => {
       //   var imagePath = `project_photos/${image['work_photos']}`; // Adjust the path as per your directory structure
-      //   var demoImage = `
+      //   demoImages += `
       //     <div class="column">
       //       <img class="demo cursor" src="${imagePath}" style="width:100%" onclick="currentSlide(${index + 1})" alt="hello">
       //     </div>
       //   `;
-      //   document.querySelector(".modal-content").innerHTML += demoImage;
       // });
+      // document.querySelector(".modal-content").innerHTML += `<div class="image-container">${demoImages}</div>`;
+ 
 
-      
-     
+      document.getElementById('work_url').innerHTML = 'URL: ' + work.url;
+      document.getElementById('caption').textContent = 'Title: ' + work.title;
+      document.getElementById('description').textContent = 'Description: ' + work.description;
+      document.getElementById('work_date').textContent = 'Date: ' + work.date;
+
+      // Set the HTML content of the elements
+      outputUrlElement.innerHTML = "URL: " + url;
+      outputDateElement.innerHTML = "Date: " + date;
+      outputTitleElement.innerHTML = title;
+      outputDescriptionElement.innerHTML = description;
 
 
-      var htmlCode = ` hi there we wre going `;
+    
 
-    // Get the element where you want to display the HTML code
-    var outputElement = document.getElementById('caption');
-
-    // Set the HTML content of the element
-    outputElement.innerHTML = htmlCode;
-      
-
-      
     })
     .catch(error => {
       console.error('Error fetching image:', error);
     });
-
-    
 }
-
-
-
-
 
 function closeModal() {
   document.getElementById("myModal").style.display = "none";
@@ -310,6 +326,7 @@ function plusSlides(n) {
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
+
 
 function showSlides(n) {
   var i;

@@ -15,6 +15,7 @@ class Work extends Model
         'work_date',
         'work_description',
         'user_id',
+        'visibility'
     ];
     public function image()
     {

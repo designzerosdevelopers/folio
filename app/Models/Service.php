@@ -14,6 +14,7 @@ class Service extends Model
         'user_id',
         'icon_id',
         'svg_icon_code',
+        'visibility'     
     ];
 
 

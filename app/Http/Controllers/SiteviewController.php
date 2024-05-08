@@ -61,9 +61,14 @@ class SiteviewController extends Controller
 
     function getImage($work_id)
     {
-
-        $image = Image::where('work_id', $work_id)->get(["work_photos"]);
-        return response()->json($image);
+        $images = Image::where('work_id', $work_id)->get(["work_photos"]);
+        $work = Work::where('id', $work_id)->first(); // Assuming there's only one work with this ID
+        $response = [
+            'images' => $images,
+            'work' => $work,
+        ];
+        return response()->json($response);
+        
     }
 
     function ViewCv($user)

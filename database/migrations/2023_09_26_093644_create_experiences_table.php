@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('exp_start')->nullable();
             $table->string('exp_end')->nullable();
             $table->text('exp_description')->nullable();
+            $table->integer('visibility')->default(0);
             $table->timestamps();
         });
     }

@@ -28,6 +28,7 @@
                       <tr>
                         <th>Degree Title</th>
                         <th>Institute</th>
+                        <th>Visibility</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -37,14 +38,37 @@
                           <tr>
                               <td>{{$degree->degree_title}}</td>
                               <td>{{$degree->institute}}</td>
+                              @if ($degree->visibility === 1)
+                              <td><span class="badge bg-label-success me-1">Visible</span></td>
+                              @else
+                              <td><span class="badge bg-label-warning me-1">Invisible</span></td>
+                              @endif
+                            
                               <td>
                                   <div class="dropdown">
                                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                           <i class="bx bx-dots-vertical-rounded"></i>
                                       </button>
                                       <div class="dropdown-menu">
-                                          <a class="dropdown-item" href="{{Route('education.show', $degree->id)}}"
+                                          
+                                        <form action="{{ route('visibility', ['id' => $degree->id, 'model' => 'Education']) }}" method="POST">
+                                          @csrf
+                                          <button type="submit" class="dropdown-item">
+                                              @if ($degree->visibility === 1)
+                                                  <i class="fas fa-eye-slash me-1"></i> Invisible
+                                                  <input type="hidden" name="visibility" value="0">
+                                              @else
+                                                  <input type="hidden" name="visibility" value="1">
+                                                  <i class="fas fa-eye me-1"></i> Visible
+                                              @endif
+                                          </button>
+                                      </form>
+                                      
+
+                                            <a class="dropdown-item" href="{{Route('education.show', $degree->id)}}"
                                               ><i class="fas fa-file me-1"></i> View</a>
+                                            
+                                            
                                           <a class="dropdown-item" href="{{Route('education.edit', $degree->id)}}"
                                               ><i class="fas fa-edit me-1"></i> Edit</a>
                                           <form action="{{ route('education.destroy', $degree->id) }}" method="POST" style="display: inline;">

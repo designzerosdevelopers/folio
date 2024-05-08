@@ -45,7 +45,8 @@
             
                         <div class="form-group mt-2">
                             <div class="col-md-6 ">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary" name="visibility" value="1">Save</button>
+                                <button type="submit" class="btn btn-secondary"name="visibility" value="0">Draft</button>
                             </div>
                         </div>
                     </form>

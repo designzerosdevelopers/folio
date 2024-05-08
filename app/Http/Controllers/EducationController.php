@@ -50,6 +50,7 @@ class EducationController extends Controller
             $data = [
                 'user_id' => auth()->id(),
                 'degree_title' => $request->degree_title,
+                'visibility' => $request->visibility,
                 'institute' => $request->institute,
                 'degree_start' => $request->degree_start,
                 'degree_description' => $request->degree_description,
@@ -106,6 +107,7 @@ class EducationController extends Controller
         $education->user_id = auth()->id();
         $education->degree_title = $request->degree_title;
         $education->institute = $request->institute;
+        $education->visibility = $request->visibility;
         $education->degree_start = $request->degree_start;
         $education->degree_description = $request->degree_description;
         
