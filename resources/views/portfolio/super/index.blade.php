@@ -499,7 +499,7 @@
                                     </a>
                                 </div>
                             @endforeach
-                        @else
+                        
             @endif
             {{-- <div class="grid-item"><a href="https://github.com">
           <figure class="portfolio-item"><img src="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-bp="{{asset('portfolio_assets/super/images/portfolio/2-small.png')}}" data-caption="Example of an optional caption."/>
