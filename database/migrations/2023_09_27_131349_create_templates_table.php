@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('temp_type')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
