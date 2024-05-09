@@ -622,7 +622,8 @@
             @endif
 
 
-            @if (!empty($experiences))
+         
+            @if (!empty($work) && count($work) > 0 and !request()->is('super'))
                 <div class="section px-3 px-lg-4 pt-5" id="experience">
                     <div class="container-narrow">
                         <div class="text-center mb-5">
@@ -651,7 +652,7 @@
                         </div>
                     </div>
                 </div>
-            @else
+                @elseif(request()->is('super'))
                 <div class="section px-3 px-lg-4 pt-5" id="experience">
                     <div class="container-narrow">
                         <div class="text-center mb-5">
