@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Icon;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
@@ -40,7 +41,6 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        // Define validation rules
         $rules = [
             'service_title' => [
                 $request->icon_id == 0 ? 'required' : 'nullable',
@@ -48,13 +48,16 @@ class ServiceController extends Controller
                 'max:255',
                 Rule::unique('services')->where(function ($query) {
                     return $query->where('user_id', auth()->id());
-                })
+                }),
             ],
-
             'icon_id' => [
                 'nullable',
-            ],
+                $request->icon_id == 0 ? null :
+                    Rule::unique('services')->where(function ($query) {
+                        return $query->where('user_id', auth()->id());
+                    })
 
+            ],
             'svg_icon_code' => $request->icon_id == 0 ? 'required' : 'nullable',
             'service_description' => 'required|string',
         ];
@@ -63,15 +66,11 @@ class ServiceController extends Controller
             $request->validate($rules, [
                 'icon_id.unique' => 'You already have a service with this title.'
             ]);
-           
-        }else{
+        } else {
             $request->validate($rules, [
                 'service_title.unique' => 'You already have a service with this title.'
             ]);
         }
-
-     
-
 
         // Create the service
         Service::create([
@@ -102,34 +101,46 @@ class ServiceController extends Controller
         }
 
         return view('admin.service.edit', ['icons' => $icons, 'service' => $service]);
-
     }
-
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        // Define the base validation rules
+
         $rules = [
             'service_title' => [
                 $request->icon_id == 0 ? 'required' : 'nullable',
                 'string',
                 'max:255',
+                Rule::unique('services')->where(function ($query) use ($request) {
+                    $query->where('user_id', auth()->id());
+                    if ($request->icon_id != 0) {
+                        $query->where('icon_id', $request->icon_id);
+                    } else {
+                        $query->whereNull('icon_id');
+                    }
+                })->ignore($id), 
             ],
-            'icon_id' => ['nullable'],
+            'icon_id' => ['nullable',
+            Rule::unique('services')->where(function ($query) use ($request) {
+                $query->where('user_id', auth()->id());
+                if ($request->icon_id != 0) {
+                    $query->where('icon_id', $request->icon_id);
+                } else {
+                    $query->whereNull('icon_id');
+                }
+            })->ignore($id), ], 
             'svg_icon_code' => [$request->icon_id == 0 ? 'required' : 'nullable'],
             'service_description' => ['required', 'string'],
         ];
-
-        // Conditionally add the unique rule for icon_id if it's not equal to 0
-        if ($request->icon_id != 0) {
-            $rules['icon_id'][] = Rule::unique('services')->where(function ($query) use ($request, $id) {
-                return $query->where('user_id', auth()->id())
-                    ->where('id', '<>', $id);
-            });
+        
+        $validator = Validator::make($request->all(), $rules);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
+        
 
 
 
