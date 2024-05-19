@@ -47,7 +47,7 @@ class PortfolioController extends Controller
             ],
             'work_url'          => ['nullable', 'max:255'],
             'work_date'         => ['required'],
-            'work_description'  => ['nullable', 'max:255'],
+            'work_description'  => ['nullable'],
             'work_photos.*'     => 'required|image|mimes:jpeg,png,jpg|max:5000',
             'work_photos'       => 'max:15',
         ]);
@@ -115,7 +115,7 @@ class PortfolioController extends Controller
             ],
             'work_url'          => ['nullable', 'max:255'],
             'work_date'         => ['required'],
-            'work_description'  => ['nullable', 'max:255'],
+            'work_description'  => ['nullable'],
             'work_photos'       => 'max:15' 
         ]);
 

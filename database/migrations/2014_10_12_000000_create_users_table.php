@@ -34,9 +34,9 @@ return new class extends Migration
             $table->string('freelancer')->nullable();
             $table->string('website')->nullable();
             $table->string('youtube')->nullable();
-            $table->string('profile_description')->nullable();
-            $table->string('skill_description')->nullable();
-            $table->string('service_description')->nullable();
+            $table->text('profile_description')->nullable();
+            $table->text('skill_description')->nullable();
+            $table->text('service_description')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

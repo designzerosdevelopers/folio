@@ -419,6 +419,9 @@ body{
 			</div>
 		</div>
 	</div>
+	{{-- <a href="{{ route('download.pdf', ['email' => $user->email]) }}" class="btn btn-secondary">Download PDF</a> --}}
+	<a href="{{ route('download.pdf') }}" class="btn btn-secondary">Download PDF</a>
+
 </div>
 
 </body>

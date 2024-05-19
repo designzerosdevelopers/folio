@@ -12,6 +12,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteviewController;
 use App\Http\Controllers\AdminsettingController;
 
+
+
+
 Route::post('/visibilty/{id}/{model}', [AdminsettingController::class, 'visibility'])->name('visibility');
 Route::get('/choose-live-folio-template', [GuestController::class, 'index'])->name('folio-template-list');
 Route::get('/profile/{temp_name}', [GuestController::class, 'create'])->name('template');
@@ -56,6 +59,8 @@ Route::get('/choose-cv-template', function () {
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/download-pdf',[SiteviewController::class, 'download_cv'])->name('download.pdf');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -108,8 +113,12 @@ Route::get('phantom', function () {
     return view('portfolio.phantom.index');
 });
 
+Route::get('tao', function () {
+    return view('cv.tao');
+});
 
 
 require __DIR__ . '/auth.php';
 
 Route::get('{user_name}', [SiteviewController::class, 'index']);
+Route::get('{user}/cv', [SiteviewController::class, 'ViewCv']);
