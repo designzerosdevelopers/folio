@@ -67,10 +67,6 @@ h2{font-size: 16px; margin-bottom: 15px;}
 <body>
 
 	<div class="main">
-		<div class="name-div">
-			<h1>MANOJ ADHIKARI</h1>
-			<p>Software Developer</p>
-		</div>
 
 		<div class="left">
 			<div class="box-1">
@@ -91,55 +87,13 @@ h2{font-size: 16px; margin-bottom: 15px;}
 				<p class="p2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
 			</div>
 			<br/>
-			<div class="box-1">
-				<p class="heading">SKILLS</p>
-				<ul class="skill">
-					<li>HMTL</li>
-					<li>CSS</li>
-					<li>JAVASCRIPT</li>
-					<li>JQUERY</li>
-					<li>ANGULAR</li>
-					<li>BOOTSTRAP</li>
-					<li>RXJS</li>
-					<li>TYPESCRIPT</li>
-					<li>MATERIAL</li>
-				</ul>
-			</div>
-
-		</div>
-
-		<div class="right">
-			
-			<div class="box-2">
-				<h2>PROFILE</h2>
-				<p class="p2">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-				</p>
-				
-			</div>
-
-			<div class="box-2">
-				<h2>PROFESSIONAL EXPERIENCE</h2>
-				<h4 style="font-size: 12px; font-weight: 600">Write your job title</h4>
-				<p class="p2">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-				</p>
-				<p class="p2">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-				</p>
-				<br/>
-				<h4 style="font-size: 12px; font-weight: 600">Write your job title</h4>
-				<p class="p2">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-				</p>
-				<p class="p2">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-				</p>
-			</div>
+		
 
 		</div>
 	</div>
 
+  <!-- Button for downloading PDF -->
+  <a href="{{ route('download.pdf') }}" class="btn btn-secondary">Download PDF</a>
 
 
 </body>

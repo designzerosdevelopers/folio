@@ -12,6 +12,15 @@ use App\Models\Image;
 use App\Models\Experience;
 use App\Models\Education;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+;
+use Illuminate\Support\Facades\View;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
+
+
 
 class SiteviewController extends Controller
 {
@@ -68,15 +77,65 @@ class SiteviewController extends Controller
             'work' => $work,
         ];
         return response()->json($response);
-        
+
     }
 
     function ViewCv($user)
     {
-        $user = User::where('email', $user)->first(); // Retrieve the user with the given email
+        $user = User::where('email', $user)->first();
         $cv_id = $user->cv_id;
-        $cv = Template::where('id', $cv_id)->first();  // Get cv template details
-        $education = Education::where('user_id', $user->id)->first();  // Get Education details
-        return view('cv.' . $cv->temp_name, ['user' =>  $user], ['education' => $education]);
+        $experience = Experience::where('user_id', $user->id)->get();
+        $work = Work::where('user_id', $user->id)->get();
+        $skills = Skill::where('user_id', $user->id)->get();
+        $cv = Template::where('id', $cv_id)->first();
+        $education = Education::where('user_id', $user->id)->get();
+        return view('cv.tao', ['user' => $user, 'educations' => $education, 'Experiences' => $experience, 'skills' => $skills, 'works' => $work]);
     }
+
+
+
+
+
+    function download_cv()
+    {
+        // Fetch dynamic data from your database
+        // $user_id = 2; // Example user ID
+        // $experience = Experience::where('user_id', $user_id)->get();
+        // $work = Work::where('user_id', $user_id)->get();
+        // $skills = Skill::where('user_id', $user_id)->get();
+        // $education = Education::where('user_id', $user_id)->get();
+
+        // // Load CV template (assuming you have a dynamic logic to select the template)
+        // $cv_id = 1; // Example CV ID
+        // $cv = Template::find($cv_id);
+
+        // // Pass data to the view
+        // $data = [
+        //     'experience' => $experience,
+        //     'work' => $work,
+        //     'skills' => $skills,
+        //     'education' => $education,
+        //     'cv' => $cv
+        // ];
+
+
+        $dompdf = new Dompdf();
+        $html = view('cv.tao')->render(); // Render the Blade view
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return $dompdf->stream('example.pdf');
+
+        // // Load the CV template view with the data
+        // $pdf = Pdf::loadView('cv.tao', $data);
+
+        // // Download the generated PDF
+        // return $pdf->download('document.pdf');
+    }
+
+
+
 }
+
+
