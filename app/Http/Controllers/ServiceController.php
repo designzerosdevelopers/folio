@@ -120,27 +120,29 @@ class ServiceController extends Controller
                     } else {
                         $query->whereNull('icon_id');
                     }
-                })->ignore($id), 
+                })->ignore($id),
             ],
-            'icon_id' => ['nullable',
-            Rule::unique('services')->where(function ($query) use ($request) {
-                $query->where('user_id', auth()->id());
-                if ($request->icon_id != 0) {
-                    $query->where('icon_id', $request->icon_id);
-                } else {
-                    $query->whereNull('icon_id');
-                }
-            })->ignore($id), ], 
+            'icon_id' => [
+                'nullable',
+                Rule::unique('services')->where(function ($query) use ($request) {
+                    $query->where('user_id', auth()->id());
+                    if ($request->icon_id != 0) {
+                        $query->where('icon_id', $request->icon_id);
+                    } else {
+                        $query->whereNull('icon_id');
+                    }
+                })->ignore($id),
+            ],
             'svg_icon_code' => [$request->icon_id == 0 ? 'required' : 'nullable'],
             'service_description' => ['required', 'string'],
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        
+
 
 
 

@@ -1,16 +1,13 @@
 import os
-import weasyprint
-
-# # # Set GTK_RUNTIME_PATH environment variable
-os.environ['GTK_RUNTIME_PATH'] = r'C:\Program Files (x86)\GTK2-Runtime\bin'
-
-# Now you can import HTML from WeasyPrint
 from weasyprint import HTML
 
+# Ensure the necessary environment variables are set
+os.environ['FONTCONFIG_FILE'] = r'C:\Program Files (x86)\GTK2-Runtime\etc\fonts\fonts.conf'
+os.environ['PATH'] += r';c:\Program Files (x86)\GTK2-Runtime\bin'
+
 # Path to your HTML and CSS files
-html_file = 'pdf.html'
-css_file = 'css.css'
+html_file = r'D:\laravel-code\portfolio\python\pdf.html'
+css_file = r'D:\laravel-code\portfolio\python\css.css'
 
 # Generate PDF
-HTML(html_file).write_pdf('cv.pdf', stylesheets=[css_file])
-
+HTML(html_file).write_pdf('cv.pdf')
