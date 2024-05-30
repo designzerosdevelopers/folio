@@ -11,6 +11,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteviewController;
 use App\Http\Controllers\AdminsettingController;
+use App\Http\Controllers\PDFController;
 
 
 
@@ -60,7 +61,8 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/download-pdf',[SiteviewController::class, 'download_cv'])->name('download.pdf');
+Route::get('/download-pdf',[PDFController::class, 'generatePDF'])->name('download.pdf');
+// Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,6 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 Route::get('brad', function () {
     return view('portfolio.brad.index');
