@@ -13,8 +13,6 @@ use App\Http\Controllers\SiteviewController;
 use App\Http\Controllers\AdminsettingController;
 
 
-
-
 Route::post('/visibilty/{id}/{model}', [AdminsettingController::class, 'visibility'])->name('visibility');
 Route::get('/choose-live-folio-template', [GuestController::class, 'index'])->name('folio-template-list');
 Route::get('/profile/{temp_name}', [GuestController::class, 'create'])->name('template');
@@ -41,7 +39,7 @@ Route::get('get-images/{id}',[SiteviewController::class, 'getImage'])->name('get
 
 // cv view
 Route::get('{user}/cv',[SiteviewController::class, 'ViewCv'])->name('view.cv');
-
+Route::get('gencv',[AdminsettingController::class, 'generatePDF']);
 
 Route::get('/', function () {
     return view('client-side.index');
