@@ -79,9 +79,9 @@ class EducationController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $degrees = Education::where('user_id', auth()->id())->get();
         $education = Education::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
-        return view('admin.education.edit',['education'=>$education]);
+        return view('admin.education.index',['degrees' => $degrees, 'education'=>$education]);
     }
 
     /**
