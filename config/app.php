@@ -185,7 +185,6 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-
         'TCPDF' => App\Facades\TCPDF::class,
     ])->toArray(),
 
