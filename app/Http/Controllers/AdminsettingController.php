@@ -15,8 +15,6 @@ class AdminsettingController extends Controller
 
     public function generatePDF()
     {
-
-
         // Create new PDF document
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
@@ -63,8 +61,8 @@ class AdminsettingController extends Controller
         $pdf->Line(15, 203, 60, 203);
 
 
-        $pdf->SetDrawColor(0); // Set color to black
-        $pdf->SetFillColor(0, 0, 0); // Set fill color to red (RGB: 255, 0, 0)
+        $pdf->SetDrawColor(0);
+        $pdf->SetFillColor(0, 0, 0);
         $pdf->Circle(94, 35, 2, 0, 360, 'F');
         $pdf->Circle(94, 127, 2, 0, 360, 'F');
         $pdf->Circle(94, 188, 2, 0, 360, 'F');
