@@ -13,6 +13,40 @@ use TCPDF_FONTS;
 class AdminsettingController extends Controller
 {
 
+    public function mupdf()
+    {
+
+        // Get the input PDF file path
+        $inputPdf = 'D:\\laravel-code\\portfolio\\public\\cv.pdf';
+
+        // Define the replacement text
+        $searchText = 'John Doe';
+        $replaceText = 'Shahab Saqib';
+
+        // Define the output PDF file path
+        $outputPdf = 'D:\\laravel-code\\portfolio\\public\\mupdf\\mu.pdf';
+
+        // Define the command to run mutool
+        $command = 'D:\\laravel-code\\portfolio\\public\\mupdf\\mutool.exe' . " clean " . $inputPdf . " " . $outputPdf . " replace-text " . $searchText . " " . $replaceText;
+
+        // Initialize variables to capture command output and return status
+        $output = [];
+        $returnVar = 0;
+
+        // Execute the command and capture both stdout and stderr
+        exec($command . ' 2>&1', $output, $returnVar);
+
+        // Check for errors
+        if ($returnVar !== 0) {
+            // If there's an error, $output contains the error message
+            return response()->json(['error' => 'Failed to execute mutool command. Output: ' . implode("\n", $output)], 500);
+        }
+
+        // Return the path to the modified PDF
+        return response()->json(['output_pdf' => $outputPdf], 200);
+    }
+
+
     public function generatePDF()
     {
         // Create new PDF document
@@ -34,11 +68,9 @@ class AdminsettingController extends Controller
         // Add a page
         $pdf->AddPage();
 
-        // Add Font Awesome font
-        $fontfile = 'c:/Users/Hi-Tech/Downloads/fontawesome-free-6.5.2-web/webfonts/fa-solid-900.ttf'; // Make sure the path is correct
+        $fontfile = 'c:/Users/Hi-Tech/Downloads/fontawesome-free-6.5.2-web/webfonts/fa-solid-900.ttf';
         $fontawesome = TCPDF_FONTS::addTTFfont($fontfile, 'TrueTypeUnicode', '', 96);
 
-        // Set the font for Font Awesome
         $pdf->SetFont($fontawesome, '', 14);
 
         // Define height of the dark portion (adjust as needed)
@@ -54,20 +86,18 @@ class AdminsettingController extends Controller
         $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(40, 41, 40)));
         $pdf->Line(94, 20, 94, $pdf->getPageHeight() - 20);
 
-        $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(255, 255, 255)));
-        $pdf->Line(15, 116, 60, 116);
-
-        $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(255, 255, 255)));
-        $pdf->Line(15, 203, 60, 203);
+        // $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(255, 255, 255)));
+        // $pdf->Line(15, 116, 60, 116);
 
 
-        $pdf->SetDrawColor(0);
-        $pdf->SetFillColor(0, 0, 0);
-        $pdf->Circle(94, 35, 2, 0, 360, 'F');
-        $pdf->Circle(94, 127, 2, 0, 360, 'F');
-        $pdf->Circle(94, 188, 2, 0, 360, 'F');
-        $pdf->Circle(94, 227, 2, 0, 360, 'F');
         
+        // $pdf->SetDrawColor(0);
+        // $pdf->SetFillColor(0, 0, 0);
+        // $pdf->Circle(94, 35, 2, 0, 360, 'F');
+        // $pdf->Circle(94, 127, 2, 0, 360, 'F');
+        // $pdf->Circle(94, 188, 2, 0, 360, 'F');
+        // $pdf->Circle(94, 227, 2, 0, 360, 'F');
+
         $leftColumn = '
              <div style="color: white; padding: 10px; height: 100%;">
             <img src="' . public_path('profile_pic/noImage.jpg') . '" alt="Profile Image" width="100" style="border-radius: 50%; margin-bottom: 20px;">
@@ -117,7 +147,6 @@ class AdminsettingController extends Controller
             </ul>
         </div>';
 
-        // Combine the columns into a single HTML structure
         $html = '
         <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
