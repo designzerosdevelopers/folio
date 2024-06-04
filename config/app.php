@@ -164,7 +164,6 @@ return [
 
         /*
          * Application Service Providers...
-         * 
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -187,7 +186,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'PDF' => 'Barryvdh\DomPDF\Facade',
-        'TCPDF' => App\Facades\TCPDF::class,
     ])->toArray(),
 
 ];
