@@ -13,9 +13,11 @@ use TCPDF_FONTS;
 class AdminsettingController extends Controller
 {
 
+ 
+
     public function generatePDF()
     {
-
+    
 
         // Create new PDF document
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
