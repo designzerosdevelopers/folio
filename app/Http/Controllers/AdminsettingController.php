@@ -8,10 +8,29 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use TCPDF;
 use TCPDF_FONTS;
-
+use Spatie\LaravelPdf\Facades\Pdf;
 
 class AdminsettingController extends Controller
 {
+
+    public function wkPDF()
+    {
+    // Command to execute wkhtmltopdf with the specified options
+    $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 D:\laravel-code\portfolio\public\w3cv.html wkcv.pdf';
+
+    // Execute the command
+    exec($command, $output, $return);
+
+        // Check if the command executed successfully
+        if ($return === 0) {
+            // Success
+            echo 'PDF generated successfully.';
+        } else {
+            // Error
+            echo 'Error generating PDF. Check your command and try again.';
+        }
+    }
+    
 
     public function mupdf()
     {
@@ -83,14 +102,14 @@ class AdminsettingController extends Controller
         $pdf->SetLineStyle(array('width' => 100, 'color' => array(0, 102, 255)));
         $pdf->Line(30, $darkHeight, 30, $pdf->getPageHeight());
 
-        $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(40, 41, 40)));
-        $pdf->Line(94, 20, 94, $pdf->getPageHeight() - 20);
 
         // $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(255, 255, 255)));
         // $pdf->Line(15, 116, 60, 116);
 
+        // $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(255, 255, 255)));
+        // $pdf->Line(15, 203, 60, 203);
 
-        
+
         // $pdf->SetDrawColor(0);
         // $pdf->SetFillColor(0, 0, 0);
         // $pdf->Circle(94, 35, 2, 0, 360, 'F');
@@ -127,7 +146,7 @@ class AdminsettingController extends Controller
         <div style="padding: 10px;">
 
             <h1>About me</h1>
-            <p>As a PHP Laravel developer with 1.5 years of experience, I specialize in crafting dynamic, scalable web applications. With expertise in developing Content Management Systems (CMS), Customer Relationship Management (CRM) platforms, Social Networking Sites (SNS), and portfolio builders, I deliver high-performance, user-friendly solutions. Proficient in modern web development practices, I\'m dedicated to innovative project execution. My tenure at Design Zeros has been instrumental, where I\'ve not only expanded my skill set but also mentored junior developers, fostering a collaborative and growth-oriented environment.</p>
+            <p style="font-family: Times New Roman, Helvetica, sans-serif">As a PHP Laravel developer with 1.5 years of experience, I specialize in crafting dynamic, scalable web applications. With expertise in developing Content Management Systems (CMS), Customer Relationship Management (CRM) platforms, Social Networking Sites (SNS), and portfolio builders, I deliver high-performance, user-friendly solutions. Proficient in modern web development practices, I\'m dedicated to innovative project execution. My tenure at Design Zeros has been instrumental, where I\'ve not only expanded my skill set but also mentored junior developers, fostering a collaborative and growth-oriented environment.</p>
 
             <h1>Education</h1>
             <p>Bachelor of Science - Degree Collage Mirpur Mathelo, 2017 - 2021</p>
