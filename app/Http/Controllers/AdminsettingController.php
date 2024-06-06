@@ -15,11 +15,10 @@ class AdminsettingController extends Controller
 
     public function wkPDF()
     {
-    // Command to execute wkhtmltopdf with the specified options
-    $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 D:\laravel-code\portfolio\public\w3cv.html wkcv.pdf';
-
-    // Execute the command
-    exec($command, $output, $return);
+        // Command to execute wkhtmltopdf with the specified options
+        $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 D:\laravel-code\portfolio\public\perfect.html wkcv.pdf';
+        // Execute the command
+        exec($command, $output, $return);
 
         // Check if the command executed successfully
         if ($return === 0) {
@@ -30,7 +29,7 @@ class AdminsettingController extends Controller
             echo 'Error generating PDF. Check your command and try again.';
         }
     }
-    
+
 
     public function mupdf()
     {
