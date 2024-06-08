@@ -3,36 +3,32 @@
 
 <head>
     <title>Resume Design</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --main-color: #db5326;
-            --secondary-color: #22222d;
-            --gray: #ebebeb;
-            --darkgray: #c2c2c2;
-            --white: #fff;
-            --lightblack: #4e4e4e;
-            --heading-font: 'Oswald', sans-serif;
-            --normal-font: system-ui;
+        html{
+            margin: 0px;
+            padding: 0px;
         }
-
         body {
-            background: var(--darkgray);
-            font-family: var(--normal-font)
+            font-family: system-ui;
+            margin: 0px;
+            padding: 0px;
         }
 
         main {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
             height: 100%;
-            background: var(--white);
-            box-shadow: 5px 21px 19px 4px #0c0c0c57;
+            margin: 0 auto;
+            background: #fff;
+            padding: 0;
+            overflow: hidden;
         }
 
-        .clearfix {
+
+        .clearfix::after {
+            content: "";
+            display: table;
             clear: both;
         }
 
@@ -41,55 +37,61 @@
         }
 
         h3 {
-            margin: 0px;
-            color: var(--main-color);
+            margin: 0;
+            color: #db5326;
             font-weight: 500;
         }
 
-        .content p {
-            margin: 0px;
+        p {
+            margin: 5px 0;
             font-size: 14px;
-            margin-top: 5px;
+        }
+
+        .left-side,
+        .right-side {
+            float: left;
+            height: 100%;
+
         }
 
         .left-side {
-            margin-left: 50px;
-            width: 260px;
-            float: left;
-            background: var(--gray);
-            height: 100%;
+            background: #ebebeb;
+            width: 37%;
+            margin-left: 40px;
+            height: 1402px;
+
         }
 
         .right-side {
-            width: 490px;
-            float: left;
+            width: 58%;
         }
 
         .profile-img {
-            border-top: 15px solid var(--main-color);
-            border-bottom: 15px solid var(--main-color);
+            border-top: 15px solid #db5326;
+            border-bottom: 15px solid #db5326;
         }
 
         h2 {
-            font-family: var(--heading-font);
+            font-family: 'Oswald', sans-serif;
             margin-top: 10px;
-            letter-spacing: 3px;
             font-weight: 200;
+            color: #db5326;
+            font-size: 30px;
         }
 
         h4 {
-            margin: 0px;
-            color: var(--lightblack);
+            margin: 0;
+            color: #4e4e4e;
             margin-top: 10px;
         }
 
         ul {
-            margin-left: -40px;
-            margin-bottom: 40px;
+            margin: 0 0 40px -40px;
+            padding: 0;
+            list-style: none;
         }
 
         ul li {
-            list-style: none;
             float: left;
             position: relative;
         }
@@ -112,11 +114,12 @@
 
         h1 {
             font-size: 50px;
-            font-family: var(--normal-font);
+            font-family: system-ui;
             font-weight: normal;
-            letter-spacing: 2px;
-            position: relative;
+            letter-spacing: 1px;
             margin-top: 10px;
+            position: relative;
+            color: #db5326;
         }
 
         h1::after {
@@ -124,36 +127,34 @@
             height: 2px;
             width: 100px;
             position: absolute;
-            background: var(--main-color);
+            background: #db5326;
             bottom: -10px;
             left: 0;
         }
 
         .para {
-            letter-spacing: 3px;
-            font-family: var(--normal-font);
+            letter-spacing: 0.01em;
+            font-weight: 600;
             font-size: 17px;
             margin-top: -10px;
         }
 
         .para1 {
-            font-size: 13px;
-            letter-spacing: 1px;
+            font-size: 18px;
         }
 
         .sub-heading {
-            font-weight: 400;
-            letter-spacing: 1px;
-            font-family: system-ui;
+            font-weight: 600;
+            font-size: 22px;
         }
 
         .para2 {
-            font-size: 13px;
+            font-size: 16px;
             font-weight: 500;
         }
 
         .para2 span {
-            background: var(--main-color);
+            background: #db5326;
             padding: 3px 10px;
             border-radius: 6px;
             color: white;
@@ -162,12 +163,12 @@
         }
 
         .ex {
-            margin-left: -40px;
-            margin-bottom: 40px;
+            margin: 0 0 40px -40px;
+            padding: 0;
+            list-style: none;
         }
 
         .ex li {
-            list-style-type: none;
             float: left;
             position: relative;
         }
@@ -176,6 +177,16 @@
             width: 75px;
             padding-right: 20px;
         }
+
+        .languages {
+            display: flex;
+        }
+
+        .languages b {
+            margin-right: 10px;
+            color: #4e4e4e;
+        }
+        
     </style>
 </head>
 
@@ -189,7 +200,7 @@
                 <p>2132 London, United Kingdom</p>
             </div>
             <br />
-            <img src="image/user.jpg" width="100%" class="profile-img" />
+            <img src="D:\laravel-code\portfolio\public\profile_pic\noImage.jpg" width="100%" class="profile-img" />
             <div class="content">
                 <h2>CONTACT</h2>
                 <h4>Phone</h4>
@@ -208,14 +219,21 @@
             </div>
 
             <div class="content">
-                <h2>HOBBIES</h2>
-                <ul>
-                    <li><img src="image/tr.png"><span>Travel</span></li>
-                    <li><img src="image/mu.png"><span>Music</span></li>
-                    <li><img src="image/wr.png"><span>Writing</span></li>
-                    <li><img src="image/ch.png"><span>Chess</span></li>
-                </ul>
+                <h2>Skills</h2>
+                <h4>Php</h4>
+                <h4>Laravel</h4>
+                <h4>HTML</h4>
+                <h4>CSS</h4>
+                <h4>Javascript</h4>
+                <h4>VUE</h4>
+
             </div>
+
+            <div class="content">
+
+
+            </div>
+
             <br /><br />
         </div>
         <div class="right-side">
@@ -225,13 +243,19 @@
                 <br /><br />
                 <h2>ABOUT ME</h2>
                 <p class="para1">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum
-                    Has Been The Industry's Standard Dummy </p>
+                    Has Been The Industry's Standard Dummy Lorem Ipsum Is Simply Dummy Text Of The Printing And
+                    Typesetting Industry. Lorem Ipsum
+                    Has Been The Industry's Standard Dummy Lorem Ipsum Is Simply Dummy Text Of The Printing And
+                    Typesetting Industry. Lorem Ipsum
+                    Has Been The Industry's Standard Dummy</p>
                 <br />
                 <h2>EDUCATION</h2>
-                <h4 class="sub-heading">SENIOUR FRONTEND DEVELOPER</h4>
+                <h4 class="sub-heading">Intermediate</h4>
+                <p class="para2"><span>2018-2022</span> School / University</p>
                 <p class="para1">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry</p>
 
-                <h4 class="sub-heading">SENIOUR FRONTEND DEVELOPER</h4>
+                <h4 class="sub-heading">Bachelors in Computer Scince</h4>
+                <p class="para2"><span>2018-present</span> School / University</p>
                 <p class="para1">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry</p>
                 <br />
 
@@ -246,17 +270,15 @@
 
                 <br />
 
-                <h2>EXPERTISE</h2>
-                <ul class="ex">
-                    <li><img src="https://m-softtech.in/image/e1.png"></li>
-                    <li><img src="https://m-softtech.in/image/e2.png"></li>
-                    <li><img src="https://m-softtech.in/image/e3.png"></li>
-                    <li><img src="https://m-softtech.in/image/e4.png"></li>
-                </ul>
+                <h2>Languages</h2>
+                <div class="languages">
+                    <b>English<b>
+                    <b>Sindhi<b>
+                    <b>Urdu<b>
+                </div>
             </div>
         </div>
 
-        <div class="clearfix"></div>
     </main>
 
 </body>

@@ -119,7 +119,9 @@ Route::get('tao', function () {
     return view('cv.tao');
 });
 
-
+Route::get('movo', function () {
+    return view('cv.movo');
+});
 require __DIR__ . '/auth.php';
 
 Route::get('{user_name}', [SiteviewController::class, 'index']);

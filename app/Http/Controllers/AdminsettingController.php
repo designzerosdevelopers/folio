@@ -9,25 +9,53 @@ use Illuminate\Http\Request;
 use TCPDF;
 use TCPDF_FONTS;
 use Spatie\LaravelPdf\Facades\Pdf;
+use Illuminate\Support\Facades\View;
 
 class AdminsettingController extends Controller
 {
 
     public function wkPDF()
     {
-        // Command to execute wkhtmltopdf with the specified options
-        $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 D:\laravel-code\portfolio\public\perfect.html wkcv.pdf';
-        // Execute the command
-        exec($command, $output, $return);
+        // $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 D:\laravel-code\portfolio\public\perfect.html wkcv.pdf';
+        // exec($command, $output, $return);
+        // if ($return === 0) {
+        //     echo 'PDF generated successfully.';
+        // } else {
+        //     echo 'Error generating PDF. Check your command and try again.';
+        // }
 
-        // Check if the command executed successfully
-        if ($return === 0) {
-            // Success
-            echo 'PDF generated successfully.';
-        } else {
-            // Error
-            echo 'Error generating PDF. Check your command and try again.';
+
+
+        // Render the Blade template into HTML
+        $html = View::make('cv.w3cv')->render();
+
+        // Define the command with the HTML content
+        $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 - -';
+        // Pass HTML content through stdin
+        $descriptors = [
+            0 => ["pipe", "r"], // stdin
+            1 => ["pipe", "w"], // stdout
+            2 => ["pipe", "w"], // stderr
+        ];
+        $process = proc_open($command, $descriptors, $pipes);
+        if (is_resource($process)) {
+            fwrite($pipes[0], $html);
+            fclose($pipes[0]);
+            $pdf = stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+            $errors = stream_get_contents($pipes[2]);
+            fclose($pipes[2]);
+            $return_value = proc_close($process);
+
+            if ($return_value !== 0) {
+                // Handle any errors
+            }
+
+            // Output the PDF content
+            file_put_contents(public_path('wkcv.pdf'), $pdf);
         }
+
+        return view('cv.w3cv');
     }
 
 
