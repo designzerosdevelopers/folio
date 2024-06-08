@@ -14,23 +14,13 @@
              font-family: sans-serif;
          }
 
-         .container {
-             background-color: #E9E7EA;
-             width: 100%;
-             margin: auto;
-             padding: 50px;
-             display: grid;
-             grid-template-columns: 35% 60%;
-             column-gap: 5%;
-             row-gap: 30px;
-         }
-
          .avatar img {
              width: 200px;
              height: 200px;
              object-fit: cover;
              border-radius: 50%;
-             margin-left: 123px;
+             margin-left: 143px;
+             margin-top: 40px;
          }
 
          .avatar {
@@ -40,19 +30,22 @@
          }
 
          .name {
+             margin-top: 40px;
              padding-left: 30px;
              border-left: 1px solid #000;
          }
 
          .name h1 {
+
              font-weight: 300;
-             font-size: xxx-large;
+             font-size: 50px;
              margin: 0px 0 5px;
              padding-left: 20px;
          }
 
          .profession {
              padding-left: 21px;
+             font-weight: bold;
          }
 
          .name .specialize {
@@ -68,27 +61,27 @@
          .name .contact span {
              display: inline-block;
              background-color: #000;
-             width: 20px;
+             width: 22px;
              height: 20px;
              color: #fff;
              text-align: center;
              border-radius: 50%;
              font-size: small;
-             margin-right: 20px;
+             margin-right: 37px;
          }
 
          .name .contact li {
-             padding: 5px 0;
+             padding: 10px 0;
              transform: translate(-40px);
              background-color: #E9E7EA;
          }
 
          .name .contact li span {
-             padding-left: 18px;
+             padding-top: 3px;
          }
 
          .info {
-            padding-top: 40px;
+             padding-top: 40px;
          }
 
          .info ul {
@@ -172,16 +165,17 @@
          .column-1 {
              margin-top: 30px;
              margin-right: 50px;
-             width: 30%;
-             height: 1452px;
+             padding-left: 37px;
+             width: 35%;
+             min-height: 1372px;
              float: left;
          }
 
          .column-2 {
              margin-top: 30px;
              margin-left: 0px;
-             width: 55%;
-             height: 1452px;
+             width: 50%;
+             min-height: 1372px;
              float: left;
          }
      </style>
@@ -212,9 +206,8 @@
                          <span>ABC D company</span>
                      </div>
                      <div class="des">
-                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium officia nobis
-                         quas
-                         excepturi consectetur quidem quia est neque doloremque.
+                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium officia
+
                      </div>
                  </div>
 
@@ -225,9 +218,8 @@
                          <span>ACDC University</span>
                      </div>
                      <div class="des">
-                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium officia nobis
-                         quas
-                         excepturi consectetur quidem quia est neque doloremque.
+                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium officia
+
                      </div>
                  </div>
                  <h2 class="skills">
@@ -245,42 +237,41 @@
                  </ul>
 
                  <h2 class="skills">
-                    LANGUAGES
-                </h2>
-                <ul>
-                    <li>ENGLISH</li>
-                    <li>URDU</li>
-                    <li>SINDHI</li>
-                </ul>
+                     LANGUAGES
+                 </h2>
+                 <ul>
+                     <li>ENGLISH</li>
+                     <li>URDU</li>
+                     <li>SINDHI</li>
+                 </ul>
 
              </div>
 
          </div>
          <div class="column-2">
              <div class="name">
-                 <h1>HO HOANG</h1>
-                 <div class="profession">Frond-End Developer</div>
+                 <h1>{{ $user->name }}</h1>
+                 <div class="profession">{{ $user->profession }}</div>
                  <ul class="contact">
                      <li>
-                         <span>P</span> +84123456789
+                         <span>P</span> {{ $user->contact_number }}
                      </li>
                      <li>
-                         <span>E</span> hohoang.dev@gmail.com
+                         <span>E</span> {{ $user->email }}
                      </li>
                      <li>
-                         <span>W</span> lundevweb.com
+                         <span>W</span> folio.com/{{ $user->name }}
                      </li>
                  </ul>
              </div>
 
-             <div class="intro">
-                 <h2>INTRODUCE MYSELT</h2>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit eligendi omnis quasi dolores modi eius
-                 aliquam ipsum soluta, dolore tenetur excepturi praesentium porro alias itaque enim labore qui
-                 necessitatibus molestias hic cum deserunt ab! Illum sed eveniet distinctio, alias sunt repudiandae
-                 labore a
-                 dolorum tenetur? Harum deleniti mollitia odio neque.
-             </div>
+             @if (!empty($user->profile_description))
+                 <div class="intro">
+                     <h2>INTRODUCE MYSELF</h2>
+                     {{ $user->profile_description }}
+                 </div>
+             @endif
+
 
              <div class="project">
                  <h2>PROJECTS</h2>
@@ -296,8 +287,6 @@
                          Frond-end Developer
                      </div>
                      <div class="des">
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto consequatur amet sed, est eum
-                         facilis repellendus
                          atque perspiciatis iste porro nobis autem explicabo expedita fugiat nostrum. Eveniet eum autem
                          culpa!
                          <ul>
@@ -320,13 +309,11 @@
                          Frond-end Developer
                      </div>
                      <div class="des">
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto consequatur amet sed, est eum
-                         facilis repellendus
+
                          atque perspiciatis iste porro nobis autem explicabo expedita fugiat nostrum. Eveniet eum autem
                          culpa!
                          <ul>
                              <li>Lorem ipsum dolordolores.</li>
-                             <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur, dolores.</li>
                              <li>Lorem ipsum dolor sit amet consectetur dolores.</li>
                          </ul>
                      </div>
@@ -346,8 +333,6 @@
                      <div class="des">
                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto consequatur amet sed, est eum
                          facilis repellendus
-                         atque perspiciatis iste porro nobis autem explicabo expedita fugiat nostrum. Eveniet eum autem
-                         culpa!
                          <ul>
                              <li>Lorem ipsum dolordolores.</li>
                              <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur, dolores.</li>
