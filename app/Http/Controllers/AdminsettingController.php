@@ -24,10 +24,12 @@ class AdminsettingController extends Controller
         //     echo 'Error generating PDF. Check your command and try again.';
         // }
 
+  
+
 
 
         // Render the Blade template into HTML
-        $html = View::make('cv.w3cv')->render();
+        $html = View::make('cv.manteam')->render();
 
         // Define the command with the HTML content
         $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 - -';
@@ -55,7 +57,7 @@ class AdminsettingController extends Controller
             file_put_contents(public_path('wkcv.pdf'), $pdf);
         }
 
-        return view('cv.w3cv');
+        return view('cv.manteam');
     }
 
 
