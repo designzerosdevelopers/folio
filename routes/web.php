@@ -40,7 +40,7 @@ Route::get('get-images/{id}',[SiteviewController::class, 'getImage'])->name('get
 
 // cv view
 Route::get('{user}/cv',[SiteviewController::class, 'ViewCv'])->name('view.cv');
-Route::get('gencv',[AdminsettingController::class, 'generatePDF']);
+Route::get('gencv',[AdminsettingController::class, 'wkPDF']);
 
 Route::get('/', function () {
     return view('client-side.index');
