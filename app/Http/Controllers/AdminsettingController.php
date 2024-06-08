@@ -29,7 +29,7 @@ class AdminsettingController extends Controller
 
 
         // Render the Blade template into HTML
-        $html = View::make('cv.manteam')->render();
+        $html = View::make('cv.juan')->render();
 
         // Define the command with the HTML content
         $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 - -';
@@ -57,7 +57,7 @@ class AdminsettingController extends Controller
             file_put_contents(public_path('wkcv.pdf'), $pdf);
         }
 
-        return view('cv.manteam');
+        return view('cv.juan');
     }
 
 
