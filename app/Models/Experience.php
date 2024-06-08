@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Experience extends Model
 {
     use HasFactory;
+    protected $table = 'experiences';
+
+    
 
     protected $fillable = [
         'user_id',
@@ -19,6 +22,10 @@ class Experience extends Model
         'visibility'     
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
     

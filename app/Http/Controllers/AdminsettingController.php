@@ -14,7 +14,9 @@ class AdminsettingController extends Controller
 
     public function wkPDF()
     {
-        $user =  User::where('id',auth()->id())->first();
+        $user = User::with(['skills','projects', 'languages', 'services', 'educations', 'experiences'])->where('id', auth()->id())->first();
+
+     
 
         $html = View::make('cv.tao',['user'=> $user])->render();
 

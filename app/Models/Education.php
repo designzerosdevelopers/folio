@@ -20,4 +20,9 @@ class Education extends Model
         'degree_description',
         'visibility'     
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

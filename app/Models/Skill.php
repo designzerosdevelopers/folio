@@ -15,4 +15,9 @@ class skill extends Model
         'user_id',
         'visibility'     
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
