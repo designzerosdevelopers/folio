@@ -68,7 +68,8 @@ class AdminsettingController extends Controller
         // Add a page
         $pdf->AddPage();
 
-        $fontfile = 'c:/Users/Hi-Tech/Downloads/fontawesome-free-6.5.2-web/webfonts/fa-solid-900.ttf';
+        $fontfile = public_path('fontawesome/webfonts/fa-solid-900.ttf');
+       
         $fontawesome = TCPDF_FONTS::addTTFfont($fontfile, 'TrueTypeUnicode', '', 96);
 
         $pdf->SetFont($fontawesome, '', 14);
@@ -169,9 +170,8 @@ class AdminsettingController extends Controller
         // Close and output PDF document
         $pdf->Output(public_path('cv.pdf'), 'F');
 
-        dd('created');
+        return response()->download(public_path('cv.pdf'))->deleteFileAfterSend(true);
 
-        return response()->download(public_path('pdfs/example.pdf'))->deleteFileAfterSend(true);
     }
 
 
