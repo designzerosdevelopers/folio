@@ -383,13 +383,13 @@
              <h2>Education</h2>
 
          @endif
-      
-     </div>
-      <!-- Button for downloading PDF -->
-      <a href="{{ route('download.pdf') }}" class="btn btn-secondary">Download PDF</a>
 
      </div>
-       
+     <!-- Button for downloading PDF -->
+     <a href="{{ route('download.pdf') }}" class="btn btn-secondary">Download PDF</a>
+
+     </div>
+
  </body>
 
  </html>

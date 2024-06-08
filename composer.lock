@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37949a2f3de83ac8301e6b754fc83398",
+    "content-hash": "35cfce61b79baa29c894185de0c8357d",
     "packages": [
         {
             "name": "barryvdh/laravel-snappy",
@@ -3548,16 +3548,16 @@
         },
         {
             "name": "spatie/browsershot",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/browsershot.git",
-                "reference": "ae2d458db2594b4fa6676e9859c142ff199db473"
+                "reference": "a080a60b6fc8dc359aaebd761eb107985e08e340"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/browsershot/zipball/ae2d458db2594b4fa6676e9859c142ff199db473",
-                "reference": "ae2d458db2594b4fa6676e9859c142ff199db473",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/a080a60b6fc8dc359aaebd761eb107985e08e340",
+                "reference": "a080a60b6fc8dc359aaebd761eb107985e08e340",
                 "shasum": ""
             },
             "require": {
@@ -3603,7 +3603,7 @@
                 "webpage"
             ],
             "support": {
-                "source": "https://github.com/spatie/browsershot/tree/4.0.4"
+                "source": "https://github.com/spatie/browsershot/tree/4.0.5"
             },
             "funding": [
                 {
@@ -3611,7 +3611,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-24T07:55:07+00:00"
+            "time": "2024-06-04T11:11:30+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
