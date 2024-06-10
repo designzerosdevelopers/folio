@@ -16,7 +16,7 @@ class AdminsettingController extends Controller
     {
         $user =  User::where('id',auth()->id())->first();
 
-        $html = View::make('cv.tao',['user'=> $user])->render();
+        $html = View::make('cv.dejavu',['user'=> $user])->render();
 
         $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 - -';
 
@@ -41,7 +41,7 @@ class AdminsettingController extends Controller
             file_put_contents(public_path('wkcv.pdf'), $pdf);
         }
 
-        return view('cv.tao', ['user' => $user]);
+        return view('cv.dejavu', ['user' => $user]);
     }
 
     public function indexsitetemplates()
