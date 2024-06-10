@@ -15,5 +15,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(IconSeeder::class);
         $this->call(TemplateSeeder::class);
+        $this->call(SkillSeederTable::class);
+        $this->call(EducationSeederTable::class);
+        $this->call(ExperienceSeederTable::class);
+        $this->call(LanguageSeederTable::class);
+        $this->call(ServicesSeederTable::class);
+        $this->call(WorkSeederTable::class);
     }
 }

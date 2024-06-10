@@ -190,60 +190,47 @@
 
             <div class="info">
                 <ul>
-                    <li>From <b>HCMC</b> - VietNam</li>
-                    <li>01/01/0101</li>
-                    <li>AAAA University</li>
+                    <li>From - <b> {{  $user->address }} </b> </li>
+                    <li>Age - {{ $user->age }}  </li>
+                    <li>University - Shah Latif </li>
                 </ul>
             </div>
 
             <div class="experience">
-                <h2>EXPERIENCE</h2>
+                @if ($user->experiences->count() > 0)
+                    <h2>EXPERIENCE</h2>
+                    @foreach ($user->experiences as $experience)
+                        <div class="item">
+                            <h4>{{ $experience->position }}</h4>
+                            <div class="time">
+                                <span>{{ date('F Y', strtotime($experience->exp_start)) }} -
+                                    {{ $experience->exp_end ? date('F Y', strtotime($experience->exp_end)) : 'Present' }}</span>
 
-                <div class="item">
-                    <h4>Frond-end Developer</h4>
-                    <div class="time">
-                        <span>2020 - 2022</span>
-                        <span>ABC D company</span>
-                    </div>
-                    <div class="des">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium officia
+                                <span>{{ $experience->company_name }}</span>
+                            </div>
+                            <div class="des">
+                                {{ $experience->exp_description }}
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
 
-                    </div>
-                </div>
 
-                <div class="item">
-                    <h4>Student</h4>
-                    <div class="time">
-                        <span>2015 - 2019</span>
-                        <span>ACDC University</span>
-                    </div>
-                    <div class="des">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium officia
 
-                    </div>
-                </div>
-                <h2 class="skills">
-                    SKILLS
-                </h2>
+                <h2 class="skills">SKILLS</h2>
                 <ul>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>Bootstrap</li>
-                    <li>Javascript</li>
-                    <li>PHP</li>
-                    <li>MySql</li>
-                    <li>Git</li>
-                    <li>Laravel</li>
+                    @foreach ($user->skills as $skill)
+                        <li>{{ $skill->skill_name }}</li>
+                    @endforeach
                 </ul>
 
-                <h2 class="skills">
-                    LANGUAGES
-                </h2>
+                <h2 class="skills">LANGUAGES</h2>
                 <ul>
-                    <li>ENGLISH</li>
-                    <li>URDU</li>
-                    <li>SINDHI</li>
+                    @foreach ($user->languages as $language)
+                        <li>{{ $language->language_name }}</li>
+                    @endforeach
                 </ul>
+
 
             </div>
 
@@ -273,75 +260,29 @@
             @endif
 
 
+
             <div class="project">
-                <h2>PROJECTS</h2>
-                <div class="item">
-                    <h4>Website shopping</h4>
-                    <div class="time">
-                        2020
-                    </div>
-                    <div class="web">
-                        www.lundevweb.com
-                    </div>
-                    <div class="location">
-                        Frond-end Developer
-                    </div>
-                    <div class="des">
-                        atque perspiciatis iste porro nobis autem explicabo expedita fugiat nostrum. Eveniet eum autem
-                        culpa!
-                        <ul>
-                            <li>Lorem ipsum dolordolores.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur, dolores.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur dolores.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <h4>Website shopping</h4>
-                    <div class="time">
-                        2020
-                    </div>
-                    <div class="web">
-                        www.lundevweb.com
-                    </div>
-                    <div class="location">
-                        Frond-end Developer
-                    </div>
-                    <div class="des">
-
-                        atque perspiciatis iste porro nobis autem explicabo expedita fugiat nostrum. Eveniet eum autem
-                        culpa!
-                        <ul>
-                            <li>Lorem ipsum dolordolores.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur dolores.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <h4>Website shopping</h4>
-                    <div class="time">
-                        2020
-                    </div>
-                    <div class="web">
-                        www.lundevweb.com
-                    </div>
-                    <div class="location">
-                        Frond-end Developer
-                    </div>
-                    <div class="des">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto consequatur amet sed, est eum
-                        facilis repellendus
-                        <ul>
-                            <li>Lorem ipsum dolordolores.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur, dolores.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur dolores.</li>
-                        </ul>
-                    </div>
-                </div>
+                @if ($user->projects->isNotEmpty())
+                    <h2>PROJECTS</h2>
+                    @foreach ($user->projects as $project)
+                        <div class="item">
+                            <h4>{{ $project->work_title }}</h4>
+                            <div class="time">
+                                {{ $project->work_date }}
+                            </div>
+                            <div class="web">
+                                <a href="{{ $project->work_url }}" target="_blank">{{ $project->work_url }}</a>
+                            </div>
+                            {{-- <div class="location">
+                                {{ $project->role }}
+                            </div> --}}
+                            <div class="des">
+                                {{ $project->work_description }}
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
-
         </div>
     </div>
 

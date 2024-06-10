@@ -10,4 +10,9 @@ class Language extends Model
     use HasFactory;
 
     protected $fillable= ['language_name', 'user_id', 'visibility'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
