@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('temp_name')->nullable();
             $table->string('temp_image')->nullable();
             $table->string('temp_type')->nullable();
+            $table->string('temp_setting')->nullable();
             $table->timestamps();
         });
 

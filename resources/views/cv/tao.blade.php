@@ -190,47 +190,52 @@
 
             <div class="info">
                 <ul>
-                    <li>From - <b> {{  $user->address }} </b> </li>
-                    <li>Age - {{ $user->age }}  </li>
-                    <li>University - Shah Latif </li>
+                    <li>From - <b>{{ $user->address }}</b></li>
+                    <li>Age - {{ $user->age }}</li>
+                    <li>Bachelor's in Computer Science</li>
+                    <li>Shah Latif University</li>            
                 </ul>
             </div>
 
             <div class="experience">
-                @if ($user->experiences->count() > 0)
-                    <h2>EXPERIENCE</h2>
-                    @foreach ($user->experiences as $experience)
-                        <div class="item">
-                            <h4>{{ $experience->position }}</h4>
-                            <div class="time">
-                                <span>{{ date('F Y', strtotime($experience->exp_start)) }} -
-                                    {{ $experience->exp_end ? date('F Y', strtotime($experience->exp_end)) : 'Present' }}</span>
 
-                                <span>{{ $experience->company_name }}</span>
+                @if ($user->expside == 'left')
+                    @if ($user->experiences->count() > 0)
+                        <h2>EXPERIENCE</h2>
+                        @foreach ($user->experiences as $experience)
+                            <div class="item">
+                                <h4>{{ $experience->position }}</h4>
+                                <div class="time">
+                                    <span>{{ date('F Y', strtotime($experience->exp_start)) }} -
+                                        {{ $experience->exp_end ? date('F Y', strtotime($experience->exp_end)) : 'Present' }}</span>
+
+                                    <span>{{ $experience->company_name }}</span>
+                                </div>
+                                <div class="des">
+                                    {{ $experience->exp_description }}
+                                </div>
                             </div>
-                            <div class="des">
-                                {{ $experience->exp_description }}
-                            </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 @endif
 
 
-
-                <h2 class="skills">SKILLS</h2>
-                <ul>
-                    @foreach ($user->skills as $skill)
-                        <li>{{ $skill->skill_name }}</li>
-                    @endforeach
-                </ul>
-
-                <h2 class="skills">LANGUAGES</h2>
-                <ul>
-                    @foreach ($user->languages as $language)
-                        <li>{{ $language->language_name }}</li>
-                    @endforeach
-                </ul>
-
+                @if ($user->skillside == 'left')
+                    <h2 style="margin-top: 50px;">SKILLS</h2>
+                    <ul style="padding: 0; margin: 0; list-style: none;">
+                        @foreach ($user->skills as $skill)
+                            <li style="padding:10px 0px;">{{ $skill->skill_name }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                @if ($user->langside == 'left')
+                    <h2 style="margin-top: 50px;">LANGUAGES</h2>
+                    <ul style="padding: 0; margin: 0; list-style: none;">
+                        @foreach ($user->languages as $language)
+                            <li style="padding:10px 0px;">{{ $language->language_name }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
             </div>
 
@@ -281,6 +286,44 @@
                             </div>
                         </div>
                     @endforeach
+                @endif
+
+                @if ($user->expside == 'right')
+                    <div style="margin-top: 50px";>
+                        @if ($user->experiences->count() > 0)
+                            <h2>EXPERIENCE</h2>
+                            @foreach ($user->experiences as $experience)
+                                <div class="item">
+                                    <h4>{{ $experience->position }}</h4>
+                                    <div class="time">
+                                        <span>{{ date('F Y', strtotime($experience->exp_start)) }} -
+                                            {{ $experience->exp_end ? date('F Y', strtotime($experience->exp_end)) : 'Present' }}</span>
+
+                                        <span>{{ $experience->company_name }}</span>
+                                    </div>
+                                    <div class="des">
+                                        {{ $experience->exp_description }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                @endif
+                @if ($user->skillside == 'right')
+                    <h2 style="margin-top: 50px;">SKILLS</h2>
+                    <ul style="padding: 0; margin: 0; list-style: none;">
+                        @foreach ($user->skills as $skill)
+                            <li style="padding:10px 0px;">{{ $skill->skill_name }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                @if ($user->langside == 'right')
+                    <h2 style="margin-top: 50px;">LANGUAGES</h2>
+                    <ul style="padding: 0; margin: 0; list-style: none;">
+                        @foreach ($user->languages as $language)
+                            <li style="padding:10px 0px;">{{ $language->language_name }}</li>
+                        @endforeach
+                    </ul>
                 @endif
             </div>
         </div>

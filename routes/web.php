@@ -29,6 +29,8 @@ Route::resource('language', LanguageController::class);
 });
 // template setting route
 Route::get('site-templates',[AdminsettingController::class, 'indexsitetemplates'])->name('index.site.templates');
+Route::get('cv-setting',[AdminsettingController::class, 'cvSetting'])->name('cv.template.settings');
+Route::post('cv-setting',[AdminsettingController::class, 'cvSettingStore'])->name('cv.setting.store');
 Route::put('template-setting-store',[AdminsettingController::class, 'templatesettingstore'])->name('template.setting.store');
 
 
@@ -117,11 +119,12 @@ Route::get('phantom', function () {
 
 Route::get('tao', function () {
     return view('cv.tao');
-});
+})->name('tao');
 
-Route::get('movo', function () {
-    return view('cv.movo');
-});
+Route::get('taotest', function () {
+    return view('cv.taotest');
+})->name('taotest');
+
 require __DIR__ . '/auth.php';
 
 Route::get('{user_name}', [SiteviewController::class, 'index']);

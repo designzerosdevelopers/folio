@@ -87,7 +87,7 @@
                 </a>
               </li>
               <li class="menu-item {{ request()->is('cv-template*') ? 'active' : '' }}">
-                <a href="#" class="menu-link">
+                <a href="{{ route('cv.template.settings')}}" class="menu-link">
                   <div class="row">
                     <span class="col-2"><i class="fas fa-dashboard"></i></span>
                     <span class="col-8">CV </span>

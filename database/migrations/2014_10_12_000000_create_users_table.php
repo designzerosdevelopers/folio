@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('age')->nullable();
             $table->bigInteger('cv_id')->nullable();
+            $table->text('cv_setting')->nullable();
             $table->bigInteger('portfolio_id')->nullable();
             $table->string('image')->default('noimage.jpg');
             $table->string('address')->nullable();

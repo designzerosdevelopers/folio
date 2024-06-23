@@ -12,13 +12,26 @@ use Illuminate\Support\Facades\View;
 class AdminsettingController extends Controller
 {
 
+    public function cvSetting()
+    {
+        return view('admin.cv-setting');
+    }
+    public function cvSettingStore(Request $r)
+    {
+        dd($r);
+        return view('admin.cv-setting');
+    }
+
+
+
     public function wkPDF()
     {
         $user = User::with(['skills','projects', 'languages', 'services', 'educations', 'experiences'])->where('id', auth()->id())->first();
+        $user->langside = 'left';
+        $user->skillside = 'left';
+        $user->expside = 'left';
 
-     
-
-        $html = View::make('cv.dejavu',['user'=> $user])->render();
+        $html = View::make('cv.tao', ['user' => $user])->render();
 
         $command = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" --page-size A4 --margin-top 0 --margin-right 0 --margin-bottom 0 --margin-left 0 - -';
 
@@ -43,7 +56,7 @@ class AdminsettingController extends Controller
             file_put_contents(public_path('wkcv.pdf'), $pdf);
         }
 
-        return view('cv.dejavu', ['user' => $user]);
+        return view('cv.tao', ['user' => $user]);
     }
 
     public function indexsitetemplates()
@@ -56,10 +69,9 @@ class AdminsettingController extends Controller
     {
         $userId = Auth::id();
         $user = User::find($userId);
-
-        // Make sure 'porfolio_id' is the correct column name in your database
         $user->portfolio_id = $request->temp_id;
         $user->save();
+
         return redirect()->back()->with('sucess', 'Your template successfully changed');
     }
 
@@ -67,16 +79,9 @@ class AdminsettingController extends Controller
     {
 
         $modelClass = app()->make("App\\Models\\$modelName");
-
-
         $model = $modelClass::find($id);
-
-
         $model->visibility = $request->visibility;
-
-
         $model->save();
-
 
         return redirect()->back()->with('success', 'Saved successfully.');
     }
